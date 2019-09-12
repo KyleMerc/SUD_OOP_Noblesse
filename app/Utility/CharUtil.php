@@ -34,22 +34,34 @@ abstract class CharUtil
 
             switch (strtolower($opt)) {
                 case 'atk':
-                    self::fight($mainChar, $enemyChar);
+                    $battleStatus = self::fight($mainChar, $enemyChar);
 
-                    if ($enemyChar->health == 0) {
+                    if ($battleStatus == 'victory') {
                         echo "\n$extraSpace You have killed the enemy\n";
                         return NULL;
                     }
 
-                    if ($mainChar->health == 0) {
+                    if ($battleStatus == 'dead') {
                         echo "\n$extraSpace You have been killed by the enemy\n";
                         return "game over";
                     }
 
                     break;
+                case 'aezakmi':
+                    echo "\n$extraSpace Life at full health!!! cheaterrrr..\n";
+                    $mainChar->health = 100;
+                    break;
+                case 'stat':
+                    self::status($mainChar);
+                    break;
+                case 'estat':
+                    self::status($enemyChar);
+                    break;
                 case 'run':
                     echo "\n$extraSpace You run away\n";
                     return 'flee';
+                default:
+                    echo "\n$extraSpace Unknown command...\n";
             }
         }
     }
@@ -72,10 +84,13 @@ abstract class CharUtil
         }
 
         $charOptions = '
-            2 actions available
-            -------------------
-            Attack enemy [atk]
-            Run away     [run]';
+            5 actions available
+            ----------------------------
+            Attack enemy        [atk]
+            Run away            [run]
+            See status          [stat]
+            See enemy status    [estat]
+            Cheat full health   [aezakmi]';
 
         $menu = "
             $mainCharName vs $enemyCharName
@@ -94,7 +109,7 @@ abstract class CharUtil
      * @param Character     $enemyChar
      * @return void
      */
-    public static function fight(MainCharacter $mainChar, Character $enemyChar): void
+    public static function fight(MainCharacter $mainChar, Character $enemyChar): ?string
     {
         echo "\n\t    =====================\n";
         $mainChar->attack($enemyChar);
@@ -102,18 +117,21 @@ abstract class CharUtil
         $enemyChar->attack($mainChar);
         echo "\n\t    =====================\n";
         sleep(1);
+
+        if ($mainChar->health == 0) return 'dead';
+        elseif ($enemyChar->health == 0) return 'victory';
+        else return NULL;
     }
 
-    public static function status(MainCharacter $mainChar): void
+    public static function status(Character $character): void
     {
-        $name       = $mainChar->name;
-        $health     = $mainChar->health;
-        $charType   = $mainChar->charType;
-        $weapon     = $mainChar->weaponType;
-        $damage     = $mainChar->damage;
+        $name           = $character->name;
+        $health         = $character->health;
+        $charType       = $character->charType;
+        $weapon         = $character->weaponType;
+        $damage         = $character->damage;
 
         $statusMsg = "
-                  Room: 
                   ----------------------------------------------
                   |                                            |
                      Name: $name -- Health: $health / 100
@@ -129,8 +147,8 @@ abstract class CharUtil
         echo $statusMsg;
     }
 }
-$mainChar = Factory::Human();
-$enemyChar =  Factory::enemyVampire();
+$mainChar = Factory::superModifiedHuman();
+$enemyChar =  Factory::enemyBoss();
 
 CharUtil::battleStart($mainChar, $enemyChar);
 CharUtil::status($mainChar);
