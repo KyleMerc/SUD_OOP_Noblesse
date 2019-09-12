@@ -22,21 +22,53 @@ class MainCharacter extends Character
         parent::__construct($defaultName, $newCharType, $newWeaponType);
     }
 
-    public function grab(array $items): void
+    /**
+     * Grab action of Main character
+     *
+     * @param array $newItem
+     * @return void
+     */
+    public function grab(array $newItem): void
     {
-        $this->inventory = $items;
+        $items = $this->inventory;
+
+        if ($items == NULL) {
+            foreach ($newItem as $item) {
+                echo "Item acquired: '$item' \n";
+            }
+
+            $this->inventory = $newItem;
+            return;
+        }
+ 
+        foreach ($newItem as $item) {
+            if (in_array($item, $items)) {
+                echo "\nYou already have this item\n";
+                return;
+            }
+
+            echo "Item acquired: '$item' \n";
+            array_push($this->inventory, $item);
+        }
     }
 
+    /**
+     * Show inventory of Main character
+     *
+     * @return void
+     */
     public function showInventory(): void
     {
         echo "\nAvailable items:\n";
 
-        if ($this->inventory == NULL)
-            echo "\nNo items found...\n";
-        else {
-            foreach ($this->inventory as $item) {
-                echo $item . "\n";
-            }
+        if ($this->inventory == NULL) {
+            echo "No items found...\n";
+            return;
+        }
+            
+        
+        foreach ($this->inventory as $item) {
+            echo $item . "\n";
         }
     }
 }

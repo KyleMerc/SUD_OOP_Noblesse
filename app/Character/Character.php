@@ -23,6 +23,7 @@ class Character
         $this->name         = $defaultName;
         $this->charType     = $newCharType;
         $this->weaponType   = $newWeaponType;
+        $this->health       = 100;
     }
 
     public function __set($property, $value): void
@@ -43,6 +44,13 @@ class Character
         return rand($this->damage[0], $this->damage[1]);
     }
 
+    /**
+     * This is used for attack method.
+     * Sets the current health after the attack.
+     *
+     * @param integer $damage
+     * @return void
+     */
     private function damageHealth(int $damage): void
     {
         $this->health -= $damage;
@@ -50,11 +58,18 @@ class Character
         if ($this->health <= 0) $this->health = 0;
     }
 
+    /**
+     * Attack method for character.
+     * It displays who attacks and number of dealt damage.
+     *
+     * @param Character $character
+     * @return void
+     */
     public function attack(Character $character): void
     {
         $damage = $this->getDamage();
         $character->damageHealth($damage);
 
-        echo "\n{$this->name} deals {$damage} damage\n";
+        echo "\n\t    {$this->name} deals {$damage} damage\n";
     }
 }
