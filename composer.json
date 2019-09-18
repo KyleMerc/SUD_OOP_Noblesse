@@ -8,7 +8,9 @@
             "email": "kyle.mercado@fullspeedtechnologies.com"
         }
     ],
-    "require": {},
+    "require": {
+        "phpunit/phpunit": "^7.5"
+    },
     "autoload": {
         "psr-4": {
             "Noblesse\\": "app"
