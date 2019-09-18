@@ -7,9 +7,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'vendor/autoload.php';
 use Noblesse\Character\Character;
 use Noblesse\Character\MainCharacter;
 
-abstract class CharacterFactory
+class CharacterFactory
 {
-
     /**
      * Frankenstein's setting
      *
