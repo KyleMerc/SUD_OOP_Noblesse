@@ -147,8 +147,3 @@ abstract class CharUtil
         echo $statusMsg;
     }
 }
-$mainChar = Factory::superModifiedHuman();
-$enemyChar =  Factory::enemyBoss();
-
-CharUtil::battleStart($mainChar, $enemyChar);
-CharUtil::status($mainChar);

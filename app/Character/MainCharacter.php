@@ -34,7 +34,7 @@ class MainCharacter extends Character
 
         if ($items == NULL) {
             foreach ($newItem as $item) {
-                echo "Item acquired: '$item' \n";
+                echo "\nItem acquired: '$item' \n";
             }
 
             $this->inventory = $newItem;
