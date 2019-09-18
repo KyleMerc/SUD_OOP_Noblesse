@@ -27,5 +27,21 @@ class CharacterTest extends TestCase
         $this->assertLessThan(100, $enemy->health);
     }
 
+    /**
+     *  @test
+     *  @doesNotPerformAssertions
+    */
+    public function main_character_can_grab_and_show_items(): void
+    {
+        $character = Char::simpleModifiedHuman();
+        $items = ['bowl', 'ramen'];
+
+        $character->grab($items);
+        $character->showInventory();
+        $character->grab(['chopsticks']);
+        $character->grab(['chopsticks']);
+        $character->showInventory();
+    }
+
     
 }
