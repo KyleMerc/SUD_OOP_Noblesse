@@ -21,7 +21,7 @@ class Room implements Direction
      * @param string $newName
      * @param bool $isDoorLocked
      */
-    public function __construct(string $newName, bool $isDoorLocked)
+    public function __construct(string $newName, bool $isDoorLocked = false)
     {
        $this->name      = $newName;
        $this->isLocked  = $isDoorLocked; 
@@ -52,8 +52,12 @@ class Room implements Direction
      * @param \Noblesee\Room\Room $west
      * @return void
      */
-    public function setDirection(Room $north = NULL, Room $east = NULL, Room $south = NULL, Room $west = NULL): void
-    {
+    public function setDirection(
+        Room $north = NULL, 
+        Room $east  = NULL, 
+        Room $south = NULL, 
+        Room $west  = NULL): void {
+
         $this->north    = $north;
         $this->east     = $east;
         $this->south    = $south;
@@ -98,5 +102,20 @@ class Room implements Direction
     public function west(): ?Direction
     {
         return $this->west;
+    }
+
+    /**
+     * 40% Enemy spawn chance
+     *
+     * @return boolean
+     */
+    public function enemySpawnChance(): bool
+    {
+        $chance = rand(1, 100);
+        $spawn  = false;
+
+        if ($chance <= 40) $spawn = true;
+        
+        return $spawn;
     }
 }

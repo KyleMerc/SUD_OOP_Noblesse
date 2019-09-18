@@ -1,6 +1,5 @@
 <?php
 
-use phpDocumentor\Reflection\Types\This;
 use PHPUnit\Framework\TestCase;
 
 class RoomTest extends TestCase
@@ -56,5 +55,16 @@ class RoomTest extends TestCase
         $this->assertIsString($room1->south()->name);
         $this->assertIsString($room1->east()->name);
         $this->assertIsString($room1->west()->name);
+    }
+
+    /** 
+     * @test 
+     * @doesNotPerformAssertions
+    */
+    public function get_enemy_spawn_chance(): void
+    {
+        $room1 = new \Noblesse\Room\Room('Upper Main Hall', false);
+    
+        var_dump($room1->enemySpawnChance());
     }
 }
