@@ -29,7 +29,7 @@ class RoomFactory
         ];
     }
 
-    public function muzakaRoom(): array
+    public static function muzakaRoom(): array
     {
         $room1 = new Room('Basement');
         $room2 = new Room('Kitchen');
@@ -49,7 +49,7 @@ class RoomFactory
         ];
     }
 
-    public function hanRoom(): array
+    public static function hanRoom(): array
     {
         $room1 = new Room('Lower Main Hall');
         $room2 = new Room('Dining Room');
@@ -69,7 +69,7 @@ class RoomFactory
         ];
     }
 
-    public function m21Room(): array
+    public static function m21Room(): array
     {
         $room1 = new Room('Entrance Hall');
         $room2 = new Room('Gallery');

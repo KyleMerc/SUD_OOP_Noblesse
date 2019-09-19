@@ -46,15 +46,21 @@ class RoomTest extends TestCase
         $room4 = new \Noblesse\Room\Room('Bedroom', false);
 
         $room1->setDirection(NULL, $room2, $room3, $room4);
+        $room2->setDirection(NULL, NULL, NULL, $room1);
+        $room3->setDirection($room1, NULL, NULL, NULL);
 
         $this->assertNull($room1->north());
         $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->east());
         $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->south());
         $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->west());
 
+        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room2->west());
+
+        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room3->north());
+
         $this->assertIsString($room1->south()->name);
-        $this->assertIsString($room1->east()->name);
-        $this->assertIsString($room1->west()->name);
+        $this->assertIsString($room2->west()->name);
+        $this->assertIsString($room3->north()->name);
     }
 
     /** 
