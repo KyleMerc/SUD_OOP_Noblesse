@@ -13,6 +13,11 @@ class RoomExplore
     private $setUpRoom;
     private $mainChar;
 
+    /**
+     * Sets the room for the main character
+     *
+     * @param string $mainChar
+     */
     public function __construct(string $mainChar)
     {
         $this->mainChar = $mainChar;
@@ -27,6 +32,12 @@ class RoomExplore
             echo "No property found";
     }
 
+    /**
+     * Initialized the room setup for the main character
+     *
+     * @param string $mainCharName
+     * @return void
+     */
     private function setCharRooms(string $mainCharName): void
     {
         switch ($mainCharName) {
@@ -48,4 +59,36 @@ class RoomExplore
                 break;    
         }
     }
+
+    /**
+     * Return null if one locked room found.
+     * Return false if no locked room found.
+     *
+     * @return boolean
+     */
+    public function foundLockedRooms(): bool
+    {
+        $north = $this->currentRoom->north();
+        $east  = $this->currentRoom->east();
+        $south = $this->currentRoom->south();
+        $west  = $this->currentRoom->west();
+        $roomMsg = '';
+
+        if ($north && $north->isLocked) $roomMsg .= "\nNorth: {$north->name}\n";
+        if ($east  && $east->isLocked)  $roomMsg .= "\nEast: {$east->name}\n";
+        if ($south && $south->isLocked) $roomMsg .= "\nSouth: {$south->name}\n";
+        if ($west  && $west->isLocked)  $roomMsg .= "\nWest: {$west->name}\n";
+
+        if ($roomMsg === '') return false;
+
+        echo "\nLocked Rooms";
+        echo "\nCmd Options: [n]/[e]/[s]/[w]";
+        echo "\n-----------------";
+        echo $roomMsg;
+        echo "-----------------\n";
+
+        return true;
+    }
+
+
 }
