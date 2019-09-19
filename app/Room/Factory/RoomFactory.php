@@ -7,8 +7,17 @@ require_once __DIR__.'../../../../vendor/autoload.php';
 use Noblesse\Room\Room;
 use Noblesse\Room\FourthRoom;
 
+/**
+ * This is where the setting of Main character rooms
+ */
 class RoomFactory
 {
+
+    /**
+     * Frankenstein's room setting
+     *
+     * @return array
+     */
     public static function frankRoom(): array
     {
         $room1 = new Room('Upper Main Floor');
@@ -29,6 +38,11 @@ class RoomFactory
         ];
     }
 
+    /**
+     * Muzaka's room setting
+     *
+     * @return array
+     */
     public static function muzakaRoom(): array
     {
         $room1 = new Room('Basement');
@@ -49,6 +63,11 @@ class RoomFactory
         ];
     }
 
+    /**
+     * Han Shinwoo's room setting
+     *
+     * @return array
+     */
     public static function hanRoom(): array
     {
         $room1 = new Room('Lower Main Hall');
@@ -69,6 +88,11 @@ class RoomFactory
         ];
     }
 
+    /**
+     * M-21's room setting
+     *
+     * @return array
+     */
     public static function m21Room(): array
     {
         $room1 = new Room('Entrance Hall');

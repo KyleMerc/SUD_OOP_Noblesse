@@ -238,6 +238,3 @@ MAP;
         }
     }
 }
-
-// $room = new RoomExplore('Frankenstein');
-// $room->roomMenu();
