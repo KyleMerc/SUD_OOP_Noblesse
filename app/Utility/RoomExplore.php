@@ -183,8 +183,9 @@ MAP;
             if (preg_match(self::$regexDirection, $opt) == 0)
                 echo "\nInvalid Command...\n";
 
-            if ($opt === 'q') break;
+            if ($opt === 'q') $opt = 'homeMenu';
 
+            //This is where the changing of room happened.
             switch ($opt) {
                 case 'n': 
                     if ($north) {
@@ -234,8 +235,3 @@ MAP;
         }
     }
 }
-
-$room = new RoomExplore('Frankenstein');
-// $room->currentRoom = $room->currentRoom->south();
-$room->roomMenu();
-// $room->foundLockedRooms();
