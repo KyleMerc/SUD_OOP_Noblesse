@@ -7,8 +7,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
 use Noblesse\Character\Character;
 use Noblesse\Character\MainCharacter;
 
-use Noblesse\Character\Factory\CharacterFactory as Factory;
-
 /**
  * For battle simulation, and see status
  */
@@ -123,7 +121,13 @@ class CharUtil
         else return NULL;
     }
 
-    public static function status(Character $character): void
+    /**
+     * Show the status of the character
+     *
+     * @param Character|MainCharacter $character
+     * @return void
+     */
+    public static function status($character): void
     {
         $name           = $character->name;
         $health         = $character->health;
