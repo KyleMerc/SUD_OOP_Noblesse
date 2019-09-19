@@ -10,6 +10,15 @@ class Room implements Direction
 {
     private $name;
     private $isLocked;
+
+    /**
+     * These 4 are Direction type
+     *
+     * @var Direction
+     * @var Direction
+     * @var Direction
+     * @var Direction
+     */
     private $north;
     private $east;
     private $south;
