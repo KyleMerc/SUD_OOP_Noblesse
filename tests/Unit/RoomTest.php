@@ -73,4 +73,49 @@ class RoomTest extends TestCase
     
         var_dump($room1->enemySpawnChance());
     }
+
+    /** @test */
+    public function set_the_rooms_for_main_character(): void
+    {
+        $room = new \Noblesse\Utility\RoomExplore('Muzaka');
+
+        $this->assertIsArray($room->setUpRoom);
+        
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['firstRoom']);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['secondRoom']);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['thirdRoom']);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['fourthRoom']);
+    }
+
+    /** @test */
+    public function found_locked_rooms(): void
+    {
+        $room = new \Noblesse\Utility\RoomExplore('Frankenstein');
+        
+        $result = $room->foundLockedRooms();
+
+        $this->assertTrue($result);
+    }
+
+    /** 
+     * @test 
+     * @doesNotPerformAssertions
+    */
+    public function available_rooms_from_the_current_room(): void
+    {
+        $room = new \Noblesse\Utility\RoomExplore('Han Shinwoo');
+
+        $room->foundRooms();
+    }
+
+    /** 
+     * @test 
+     * @doesNotPerformAssertions
+    */
+    public function show_room_menu_options_and_enemy_chance_ambush_on_next_room(): void
+    {
+        $room = new \Noblesse\Utility\RoomExplore('Frankenstein');
+        
+        $room->roomMenu();
+    }
 }

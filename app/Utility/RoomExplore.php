@@ -232,6 +232,12 @@ MAP;
 
                     break;
             }
+
+            if ($this->currentRoom->enemySpawnChance('ambush'))
+                echo "Fight";
         }
     }
 }
+
+// $room = new RoomExplore('Frankenstein');
+// $room->roomMenu();
