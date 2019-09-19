@@ -105,16 +105,18 @@ class Room implements Direction
     }
 
     /**
-     * 40% Enemy spawn chance
+     * 40% Enemy spawn chance(ambush)
+     * 30% Enemy spawn chance
      *
-     * @return boolean
+     * @return bool
      */
-    public function enemySpawnChance(): bool
+    public function enemySpawnChance(string $trap = ''): bool
     {
         $chance = rand(1, 100);
         $spawn  = false;
 
-        if ($chance <= 40) $spawn = true;
+        if ($chance <= 30 && $trap == '') $spawn = true;
+        if ($chance <= 35 && $trap == 'ambush') $spawn = true;
         
         return $spawn;
     }
