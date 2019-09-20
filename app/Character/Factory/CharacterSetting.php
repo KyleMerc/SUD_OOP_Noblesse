@@ -14,7 +14,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function superModifiedHuman(): MainCharacter
+    public static function frankMainChar(): MainCharacter
     {
         $frank          = new MainCharacter('Frankenstein', 'Super Modified Human', 'Dark Spear');
         $frank->damage  = [30, 50];
@@ -27,7 +27,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function simpleModifiedHuman(): MainCharacter
+    public static function m21MainChar(): MainCharacter
     {
         $m21            = new MainCharacter('M-21', 'Simple Mofidied Human', 'Gun');
         $m21->damage    = [25, 30];
@@ -40,7 +40,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function werewolf(): MainCharacter
+    public static function muzakaMainChar(): MainCharacter
     {
         $muzaka         = new MainCharacter('Muzaka', 'Werewolf', 'Strong Punch');
         $muzaka->damage = [25, 45];
@@ -53,7 +53,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function human(): MainCharacter
+    public static function hanMainChar(): MainCharacter
     {
         $han            = new MainCharacter('Han Shinwoo', 'Human', 'Karate');
         $han->damage    = [40, 45];

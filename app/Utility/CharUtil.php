@@ -12,7 +12,7 @@ use Noblesse\Character\Factory\CharacterFactory as Factory;
 /**
  * For battle simulation, and see status
  */
-abstract class CharUtil
+class CharUtil
 {
     /**
      * Battle interface for characters
