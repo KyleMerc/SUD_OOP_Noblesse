@@ -10,7 +10,6 @@ class RoomExplore
 {
     private $currentRoom;
     private $setUpRoom;
-    private $mainChar;
     private static $regexDirection = '/^[^a-z0-9]*([newsq])[^a-z0-9]*$/';
 
     /**
@@ -18,10 +17,10 @@ class RoomExplore
      *
      * @param string $mainChar
      */
-    public function __construct(string $mainChar)
+    public function __construct(string $mainCharOpt)
     {
-        $this->mainChar = $mainChar;
-        $this->setCharRooms($this->mainChar);
+        $this->setUpRoom    = Room::createCharRoom($mainCharOpt);
+        $this->currentRoom  = $this->setUpRoom['firstRoom'];
     }
 
     //For test purposes only
@@ -39,34 +38,6 @@ class RoomExplore
             return $this->$prop;
         else
             echo "No property found";
-    }
-
-    /**
-     * Initialized the room setup for the main character
-     *
-     * @param string $mainCharName
-     * @return void
-     */
-    private function setCharRooms(string $mainCharName): void
-    {
-        switch ($mainCharName) {
-            case 'Frankenstein':
-                $this->setUpRoom   = Room::frankRoom();
-                $this->currentRoom = $this->setUpRoom['firstRoom'];
-                break;
-            case 'Muzaka':
-                $this->setUpRoom   = Room::muzakaRoom();
-                $this->currentRoom = $this->setUpRoom['firstRoom'];
-                break; 
-            case 'Han Shinwoo':
-                $this->setUpRoom   = Room::hanRoom();
-                $this->currentRoom = $this->setUpRoom['firstRoom'];
-                break; 
-            case 'M-21':
-                $this->setUpRoom   = Room::m21Room();
-                $this->currentRoom = $this->setUpRoom['firstRoom'];
-                break;    
-        }
     }
 
     /**
@@ -238,3 +209,6 @@ MAP;
         }
     }
 }
+
+$obj = new RoomExplore('m21');
+$obj->roomMenu();

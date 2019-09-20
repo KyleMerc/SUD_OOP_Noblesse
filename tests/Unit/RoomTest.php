@@ -77,7 +77,7 @@ class RoomTest extends TestCase
     /** @test */
     public function set_the_rooms_for_main_character(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('Muzaka');
+        $room = new \Noblesse\Utility\RoomExplore('muzaka');
 
         $this->assertIsArray($room->setUpRoom);
         
@@ -90,7 +90,7 @@ class RoomTest extends TestCase
     /** @test */
     public function found_locked_rooms(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('Frankenstein');
+        $room = new \Noblesse\Utility\RoomExplore('frank');
         
         $result = $room->foundLockedRooms();
 
@@ -103,18 +103,18 @@ class RoomTest extends TestCase
     */
     public function available_rooms_from_the_current_room(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('Han Shinwoo');
+        $room = new \Noblesse\Utility\RoomExplore('han');
 
         $room->foundRooms();
     }
 
     /** 
-     * @test 
+     * @test
      * @doesNotPerformAssertions
     */
     public function show_room_menu_options_and_enemy_chance_ambush_on_next_room(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('Frankenstein');
+        $room = new \Noblesse\Utility\RoomExplore('frank');
         
         $room->roomMenu();
     }
