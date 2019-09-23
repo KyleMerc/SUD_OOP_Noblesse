@@ -7,8 +7,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
 use Noblesse\Character\Character;
 use Noblesse\Character\MainCharacter;
 
-use Noblesse\Character\Factory\CharacterFactory as Factory;
-
 /**
  * For battle simulation, and see status
  */
