@@ -16,9 +16,9 @@ class RoomSetting
     /**
      * Frankenstein's room setting
      *
-     * @return array
+     * @return \Noblesse\Room\Room
      */
-    public static function frankRoom(): array
+    public static function frankRoom(): Room
     {
         $room1 = new Room('Upper Main Floor');
         $room2 = new Room('Kitchen');
@@ -30,20 +30,15 @@ class RoomSetting
         $room3->setDirection($room1, NULL, NULL, NULL);
         $room4->setDirection(NULL, $room1, NULL, NULL);
         
-        return [
-            'firstRoom'  => $room1,
-            'secondRoom' => $room2,
-            'thirdRoom'  => $room3,
-            'fourthRoom' => $room4
-        ];
+        return $room1;
     }
 
     /**
      * Muzaka's room setting
      *
-     * @return array
+     * @return \Noblesse\Room\Room
      */
-    public static function muzakaRoom(): array
+    public static function muzakaRoom(): Room
     {
         $room1 = new Room('Basement');
         $room2 = new Room('Kitchen');
@@ -55,20 +50,15 @@ class RoomSetting
         $room3->setDirection(NULL, NULL, $room4, $room1);
         $room4->setDirection($room3, NULL, NULL, NULL);
         
-        return [
-            'firstRoom'  => $room1,
-            'secondRoom' => $room2,
-            'thirdRoom'  => $room3,
-            'fourthRoom' => $room4
-        ];
+        return $room1;
     }
 
     /**
      * Han Shinwoo's room setting
      *
-     * @return array
+     * @return \Noblesse\Room\Room
      */
-    public static function hanRoom(): array
+    public static function hanRoom(): Room
     {
         $room1 = new Room('Lower Main Hall');
         $room2 = new Room('Dining Room');
@@ -80,20 +70,15 @@ class RoomSetting
         $room3->setDirection(NULL, NULL, NULL, $room2);
         $room4->setDirection($room1, NULL, NULL, NULL);
         
-        return [
-            'firstRoom'  => $room1,
-            'secondRoom' => $room2,
-            'thirdRoom'  => $room3,
-            'fourthRoom' => $room4
-        ];
+        return $room1;
     }
 
     /**
      * M-21's room setting
      *
-     * @return array
+     * @return \Noblesse\Room\Room
      */
-    public static function m21Room(): array
+    public static function m21Room(): Room
     {
         $room1 = new Room('Entrance Hall');
         $room2 = new Room('Gallery');
@@ -105,11 +90,6 @@ class RoomSetting
         $room3->setDirection($room2, NULL, NULL, NULL);
         $room4->setDirection(NULL, NULL, $room2, NULL);
         
-        return [
-            'firstRoom'  => $room1,
-            'secondRoom' => $room2,
-            'thirdRoom'  => $room3,
-            'fourthRoom' => $room4
-        ];
+        return $room1;
     }
 }

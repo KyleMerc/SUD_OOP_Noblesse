@@ -9,7 +9,6 @@ use Noblesse\Room\Factory\RoomFactory as Room;
 class RoomExplore
 {
     private $currentRoom;
-    private $setUpRoom;
     private static $regexDirection = '/^[^a-z0-9]*([newsq])[^a-z0-9]*$/';
 
     /**
@@ -19,8 +18,7 @@ class RoomExplore
      */
     public function __construct(string $mainCharOpt)
     {
-        $this->setUpRoom    = Room::createCharRoom($mainCharOpt);
-        $this->currentRoom  = $this->setUpRoom['firstRoom'];
+        $this->currentRoom = Room::createCharRoom($mainCharOpt);
     }
 
     //For test purposes only

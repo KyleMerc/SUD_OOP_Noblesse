@@ -12,9 +12,9 @@ class RoomFactory
      * Creation of main character rooms
      *
      * @param string $roomOpt
-     * @return array|null
+     * @return \Noblesse\Room\Room
      */
-    public static function createCharRoom(string $roomOpt): ?array
+    public static function createCharRoom(string $roomOpt): \Noblesse\Room\Room
     {
         $charRoom = $roomOpt . "Room";
 
