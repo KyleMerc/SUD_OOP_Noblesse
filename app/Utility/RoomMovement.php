@@ -47,11 +47,6 @@ class RoomMovement
         ------------------\n";
 
         while(true) {
-            $north       = $this->currentRoom->north;
-            $east        = $this->currentRoom->east;
-            $south       = $this->currentRoom->south;
-            $west        = $this->currentRoom->west;
-
             // Echo visual map and returns an array
             $foundRoomOpt = $this->currentRoom->foundRooms();
             $foundRoomOptDisplay = '';
@@ -70,20 +65,7 @@ class RoomMovement
             if ($opt === 'q') return;
 
             //This is where the changing of room happened.
-            switch ($opt) {
-                case 'n': 
-                    $nextRoom = $north;
-                    break;
-                case 'e': 
-                    $nextRoom = $east;
-                    break;
-                case 's': 
-                    $nextRoom = $south;
-                    break;
-                case 'w': 
-                    $nextRoom = $west; 
-                    break;
-            }
+            $nextRoom = $this->currentRoom->goToNextRoom(self::returnWordDirection($opt));
 
             if ($nextRoom) {
                 if ($nextRoom->isLocked) {
@@ -95,8 +77,19 @@ class RoomMovement
             } else echo $noRoomMsg;
             //------------------------------------
 
+            //A chance of ambush by the enemy
             if ($this->currentRoom->spawnEnemyChance('ambush'))
                 echo "Fight";
+        }
+    }
+
+    private static function returnWordDirection(string $directionOpt): string
+    {
+        switch($directionOpt) {
+            case 'n': return 'north';
+            case 'e': return 'east';
+            case 's': return 'south';
+            case 'w': return 'west';
         }
     }
 }
