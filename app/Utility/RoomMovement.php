@@ -57,11 +57,15 @@ class RoomMovement
                 $foundRoomOptDisplay .= " [$oneChar]";
             }
 
-            $opt = readline("Where to go?{$foundRoomOptDisplay}\n or Go back [q]: ");
+            $opt = \readline("Where to go?{$foundRoomOptDisplay}\n or Go back [q]: ");
             //----------------------------------
 
-            if (preg_match(self::$regexDirection, $opt) == 0) echo "\nInvalid Command...\n";
+            if (\preg_match(self::$regexDirection, $opt) == 0) {
+                echo "\nInvalid Command...\n";
+                continue;
+            }
 
+            //Exit room menu
             if ($opt === 'q') return;
 
             //This is where the changing of room happened.
@@ -78,11 +82,17 @@ class RoomMovement
             //------------------------------------
 
             //A chance of ambush by the enemy
-            if ($this->currentRoom->spawnEnemyChance('ambush'))
+            if ($this->currentRoom->spawnEnemyChance())
                 echo "Fight";
         }
     }
 
+    /**
+     * Returns the word of 4 direction picked by the user
+     *
+     * @param string $directionOpt
+     * @return string
+     */
     private static function returnWordDirection(string $directionOpt): string
     {
         switch($directionOpt) {
@@ -93,9 +103,3 @@ class RoomMovement
         }
     }
 }
-
-$obj = new RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('frank'));
-// $obj->currentRoom = $obj->currentRoom->goToNextRoom('west');
-// $obj->currentRoom->foundRooms();
-// $obj->currentRoom->foundLockedRooms();
-$obj->showRoomMenu();
