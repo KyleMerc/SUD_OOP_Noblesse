@@ -14,4 +14,13 @@
 //   $greetingFunction = getGreetingFunction();
 //   echo $greetingFunction( "Fred" ); // Displays "Good Morning, Fred!"
 // var_dump(0 == true);
-phpinfo();
+$opt = 'n';
+
+switch ($opt) {
+    case ($opt === 'n' || $opt === 'no'):
+        echo "YES!!\n";
+        break;
+    default:
+        echo ".......\n";
+}
+

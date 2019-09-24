@@ -52,26 +52,13 @@ class Room implements Direction
             echo "No property found";
     }
 
-    // /**
-    //  * Set the connected rooms
-    //  *
-    //  * @param \Noblesee\Room\Room $north
-    //  * @param \Noblesee\Room\Room $east
-    //  * @param \Noblesee\Room\Room $south
-    //  * @param \Noblesee\Room\Room $west
-    //  * @return void
-    //  */
-    // public function setDirection(
-    //     Room $north = NULL, 
-    //     Room $east  = NULL, 
-    //     Room $south = NULL, 
-    //     Room $west  = NULL): void {
-
-    //     $this->north    = $north;
-    //     $this->east     = $east;
-    //     $this->south    = $south;
-    //     $this->west     = $west;
-    // }
+    /**
+     * Attaching to it's correct rooms
+     *
+     * @param string $direction
+     * @param Room $room
+     * @return void
+     */
     public function attachRoom(string $direction, Room $room): void
     {
         if ($this->$direction) return;
@@ -82,6 +69,13 @@ class Room implements Direction
         $room->attachRoom($attachedTo, $this);    
     }
 
+    /**
+     * Returns the oppsite direction from the current room to
+     * attached it to the opposite room.
+     *
+     * @param string $direction
+     * @return string
+     */
     private static function getOppositeDirection(string $direction): string
     {
         switch ($direction) {
@@ -93,43 +87,72 @@ class Room implements Direction
     }
 
     /**
-     * Returns north room
-     * 
-     * @return \Noblesse\Room\Interfaces\Direction|null
+     * Print the adjacent rooms of the current room.
+     * Displays visual map of the room.
+     *
+     * @return array
      */
-    public function north(): ?Direction
+    public function foundRooms(): array
     {
-        return $this->north;
+        $north       = $this->north;
+        $east        = $this->east;
+        $south       = $this->south;
+        $west        = $this->west;
+        $roomMsg     = '';
+        $roomDisplay = [];
+
+        if ($north) {
+            $roomMsg .= "North: {$north->name}\n"; 
+            $roomDisplay['north'] = $north->name;
+        } else $roomDisplay['north'] = '';
+
+        if ($east) {
+            $roomMsg .= "East:  {$east->name}\n";
+            $roomDisplay['east'] = $east->name;
+        } else $roomDisplay['east'] = '';
+
+        if ($south) {
+            $roomMsg .= "South: {$south->name}\n";
+            $roomDisplay['south'] = $south->name;
+        } else $roomDisplay['south'] = '';
+
+        if ($west) {
+            $roomMsg .= "West:  {$west->name}\n";
+            $roomDisplay['west'] = $west->name;
+        } else $roomDisplay['west'] = '';
+
+        $visualMap = <<<MAP
+                        {$roomDisplay['north']}
+                              north
+                                |
+          {$roomDisplay['west']}                               {$roomDisplay['east']}             
+            west -----                     ------ east 
+                        
+                                |
+                              south
+                            {$roomDisplay['south']}
+MAP;
+
+        echo "\n" . $visualMap;
+        echo "\nAdjacent Rooms\n";
+        echo "----------------\n";
+        echo $roomMsg;
+        echo "----------------\n";
+
+        return $roomDisplay;
     }
 
     /**
-     * Returns east room
+     * Returns the next selected room
      *
-     * @return \Noblesse\Room\Interfaces\Direction|null
+     * @param string $direction
+     * @return Room
      */
-    public function east(): ?Direction
+    public function goToNextRoom(string $direction): ?Room
     {
-        return $this->east;
-    }
+        if ($this->$direction) return $this->$direction;
 
-    /**
-     * Returns south room
-     *
-     * @return \Noblesse\Room\Interfaces\Direction|null
-     */
-    public function south(): ?Direction
-    {
-        return $this->south;
-    }
-
-    /**
-     * Returns west room
-     *
-     * @return \Noblesse\Room\Interfaces\Direction|null
-     */
-    public function west(): ?Direction
-    {
-        return $this->west;
+        return NULL;
     }
 
     /**
@@ -138,7 +161,7 @@ class Room implements Direction
      *
      * @return bool
      */
-    public function enemySpawnChance(string $trap = ''): bool
+    public function spawnEnemyChance(string $trap = ''): bool
     {
         $chance = rand(1, 100);
         $spawn  = false;

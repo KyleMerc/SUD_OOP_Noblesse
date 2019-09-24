@@ -14,9 +14,9 @@ class RoomFactory
      * @param string $roomOpt
      * @return \Noblesse\Room\Room
      */
-    public static function createCharRoom(string $roomOpt): \Noblesse\Room\Room
+    public static function setCharRoom(string $roomOpt): \Noblesse\Room\Room
     {
-        $charRoom = $roomOpt . "Room";
+        $charRoom = "set" . ucwords($roomOpt) . "Room";
 
         if (method_exists(Setting::class, $charRoom)) {
             return Setting::$charRoom();

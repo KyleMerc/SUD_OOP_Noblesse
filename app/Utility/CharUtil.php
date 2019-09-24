@@ -19,7 +19,7 @@ class CharUtil
      * @param Character     $enemyChar
      * @return void
      */
-    public static function battleStart(MainCharacter $mainChar, Character $enemyChar): ?string
+    public static function startBattle(MainCharacter $mainChar, Character $enemyChar): ?string
     {
         $mainCharName   = $mainChar->name;
         $enemyCharName  = $enemyChar->name . "({$enemyChar->charType})";
@@ -28,7 +28,7 @@ class CharUtil
 
         echo "$extraSpace A battle has started\n";
         while ($opt != 'run') {
-            $opt = self::menuBattle($mainCharName, $enemyCharName);
+            $opt = self::showMenuBattle($mainCharName, $enemyCharName);
 
             switch (strtolower($opt)) {
                 case 'atk':
@@ -50,10 +50,10 @@ class CharUtil
                     $mainChar->health = 100;
                     break;
                 case 'stat':
-                    self::status($mainChar);
+                    self::getStatus($mainChar);
                     break;
                 case 'estat':
-                    self::status($enemyChar);
+                    self::getStatus($enemyChar);
                     break;
                 case 'run':
                     echo "\n$extraSpace You run away\n";
@@ -71,7 +71,7 @@ class CharUtil
      * @param string $enemyCharName
      * @return string
      */
-    public static function menuBattle(string $mainCharName, string $enemyCharName): string
+    public static function showMenuBattle(string $mainCharName, string $enemyCharName): string
     {
         $lineLength = strlen($enemyCharName.$mainCharName) + 4;
         $line       = '';
@@ -127,7 +127,7 @@ class CharUtil
      * @param Character|MainCharacter $character
      * @return void
      */
-    public static function status($character): void
+    public static function getStatus($character): void
     {
         $name           = $character->name;
         $health         = $character->health;

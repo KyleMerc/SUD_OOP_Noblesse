@@ -18,7 +18,7 @@ class RoomSetting
      *
      * @return \Noblesse\Room\Room
      */
-    public static function frankRoom(): Room
+    public static function setFrankRoom(): Room
     {
         $room1 = new Room('Upper Main Floor');
         $room2 = new Room('Kitchen');
@@ -37,7 +37,7 @@ class RoomSetting
      *
      * @return \Noblesse\Room\Room
      */
-    public static function muzakaRoom(): Room
+    public static function setMuzakaRoom(): Room
     {
         $room1 = new Room('Basement');
         $room2 = new Room('Kitchen');
@@ -57,7 +57,7 @@ class RoomSetting
      *
      * @return \Noblesse\Room\Room
      */
-    public static function hanRoom(): Room
+    public static function setHanRoom(): Room
     {
         $room1 = new Room('Lower Main Hall');
         $room2 = new Room('Dining Room');
@@ -77,7 +77,7 @@ class RoomSetting
      *
      * @return \Noblesse\Room\Room
      */
-    public static function m21Room(): Room
+    public static function setM21Room(): Room
     {
         $room1 = new Room('Entrance Hall');
         $room2 = new Room('Gallery');
@@ -85,12 +85,9 @@ class RoomSetting
         $room4 = new FourthRoom('Drawing Room', true);
 
         $room2->attachRoom('north', $room4);
-        $room2->attachRoom('east', $room1);
+        $room2->attachRoom('west', $room1);
         $room2->attachRoom('south', $room3);
         
         return $room1;
     }
 }
-
-$obj = RoomSetting::m21Room();
-var_dump($obj);
