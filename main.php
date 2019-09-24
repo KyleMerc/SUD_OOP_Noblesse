@@ -14,13 +14,11 @@
 //   $greetingFunction = getGreetingFunction();
 //   echo $greetingFunction( "Fred" ); // Displays "Good Morning, Fred!"
 // var_dump(0 == true);
-$opt = 'n';
+$lol = ['north' => '', 'south' => 'bedroom', 'west' => 'balcony', 'east' => 'kitchen'];
+foreach ($lol as $key => $direction) {
+    if ($direction == false) continue;
 
-switch ($opt) {
-    case ($opt === 'n' || $opt === 'no'):
-        echo "YES!!\n";
-        break;
-    default:
-        echo ".......\n";
+    $oneChar = substr($key, 0, 1);
+    var_dump($oneChar);
 }
 

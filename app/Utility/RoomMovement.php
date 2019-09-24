@@ -14,7 +14,7 @@ class RoomMovement
     /**
      * Sets the room for the main character
      *
-     * @param string $mainChar
+     * @param \Noblesse\Room\Room $mainChar
      */
     public function __construct(Room $mainCharRoom)
     {
@@ -32,9 +32,9 @@ class RoomMovement
     /**
      * Show room menu
      *
-     * @return string
+     * @return void
      */
-    public function roomMenu(): string
+    public function showRoomMenu(): void
     {
         $opt = '';
         $noRoomMsg = "
@@ -52,68 +52,57 @@ class RoomMovement
             $south       = $this->currentRoom->south;
             $west        = $this->currentRoom->west;
 
-            $this->currentRoom->foundRooms();
+            // Echo visual map and returns an array
+            $foundRoomOpt = $this->currentRoom->foundRooms();
+            $foundRoomOptDisplay = '';
+            foreach ($foundRoomOpt as $key => $direction) {
+                if (empty($direction)) continue;
 
-            $opt = readline("Where to go?\n[n]/[e]/[s]/[w] or Go back [q]: ");
+                $oneChar = \substr($key, 0, 1);
+                $foundRoomOptDisplay .= " [$oneChar]";
+            }
+
+            $opt = readline("Where to go?{$foundRoomOptDisplay}\n or Go back [q]: ");
+            //----------------------------------
 
             if (preg_match(self::$regexDirection, $opt) == 0) echo "\nInvalid Command...\n";
 
-            if ($opt === 'q') return 'homeMenu';
+            if ($opt === 'q') return;
 
             //This is where the changing of room happened.
             switch ($opt) {
                 case 'n': 
-                    if ($north) {
-                        if ($north->isLocked) {
-                            echo $lockedRoomMsg;
-                            break;
-                        }
-
-                        $this->currentRoom = $north;
-                    } else echo $noRoomMsg;
-
+                    $nextRoom = $north;
                     break;
                 case 'e': 
-                    if ($east) {
-                        if ($east->isLocked) {
-                            echo $lockedRoomMsg;
-                            break;
-                        }
-
-                        $this->currentRoom = $east;
-                    } else echo $noRoomMsg;
-
+                    $nextRoom = $east;
                     break;
                 case 's': 
-                    if ($south) {
-                        if ($south->isLocked) {
-                            echo $lockedRoomMsg;
-                            break;
-                        }
-
-                        $this->currentRoom = $south;
-                    } else echo $noRoomMsg;    
-
+                    $nextRoom = $south;
                     break;
                 case 'w': 
-                    if ($west) {
-                        if ($west->isLocked) {
-                            echo $lockedRoomMsg;
-                            break;
-                        }
-
-                        $this->currentRoom = $west;
-                    } else echo $noRoomMsg;    
-
+                    $nextRoom = $west; 
                     break;
             }
 
-            if ($this->currentRoom->enemySpawnChance('ambush'))
+            if ($nextRoom) {
+                if ($nextRoom->isLocked) {
+                    echo $lockedRoomMsg;
+                    continue;
+                }
+
+                $this->currentRoom = $nextRoom;
+            } else echo $noRoomMsg;
+            //------------------------------------
+
+            if ($this->currentRoom->spawnEnemyChance('ambush'))
                 echo "Fight";
         }
     }
 }
 
-$obj = new RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('m21'));
+$obj = new RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('frank'));
 // $obj->currentRoom = $obj->currentRoom->goToNextRoom('west');
-$obj->currentRoom->foundRooms();
+// $obj->currentRoom->foundRooms();
+// $obj->currentRoom->foundLockedRooms();
+$obj->showRoomMenu();

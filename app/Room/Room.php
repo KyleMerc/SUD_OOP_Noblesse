@@ -87,6 +87,53 @@ class Room implements Direction
     }
 
     /**
+     * Return null if one locked room found.
+     * Return false if no locked room found.
+     *
+     * @return boolean
+     */
+    public function foundLockedRooms(): bool
+    {
+        $north = $this->north;
+        $east  = $this->east;
+        $south = $this->south;
+        $west  = $this->west;
+        $roomMsg = '';
+        $roomOpt = '';
+
+        if ($north && $north->isLocked) {
+            $roomMsg .= "North: {$north->name}\n";
+            $roomOpt = ' [n]';
+        } 
+            
+        if ($east  && $east->isLocked) {
+            $roomMsg .= "East:  {$east->name}\n";
+            $roomOpt = ' [e]';
+        } 
+            
+        if ($south && $south->isLocked) {
+            $roomMsg .= "South: {$south->name}\n";
+            $roomOpt = ' [s]';
+        } 
+            
+        if ($west  && $west->isLocked) {
+            $roomMsg .= "West:  {$west->name}\n";
+            $roomOpt = ' [w]';
+        } 
+            
+
+        if ($roomMsg === '') return false;
+
+        echo "\nLocked Rooms";
+        echo "\nCmd Options:$roomOpt";
+        echo "\n-----------------\n";
+        echo $roomMsg;
+        echo "-----------------\n";
+
+        return true;
+    }
+
+    /**
      * Print the adjacent rooms of the current room.
      * Displays visual map of the room.
      *
