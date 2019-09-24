@@ -52,30 +52,49 @@ class Room implements Direction
             echo "No property found";
     }
 
-    /**
-     * Set the connected rooms
-     *
-     * @param \Noblesee\Room\Room $north
-     * @param \Noblesee\Room\Room $east
-     * @param \Noblesee\Room\Room $south
-     * @param \Noblesee\Room\Room $west
-     * @return void
-     */
-    public function setDirection(
-        Room $north = NULL, 
-        Room $east  = NULL, 
-        Room $south = NULL, 
-        Room $west  = NULL): void {
+    // /**
+    //  * Set the connected rooms
+    //  *
+    //  * @param \Noblesee\Room\Room $north
+    //  * @param \Noblesee\Room\Room $east
+    //  * @param \Noblesee\Room\Room $south
+    //  * @param \Noblesee\Room\Room $west
+    //  * @return void
+    //  */
+    // public function setDirection(
+    //     Room $north = NULL, 
+    //     Room $east  = NULL, 
+    //     Room $south = NULL, 
+    //     Room $west  = NULL): void {
 
-        $this->north    = $north;
-        $this->east     = $east;
-        $this->south    = $south;
-        $this->west     = $west;
+    //     $this->north    = $north;
+    //     $this->east     = $east;
+    //     $this->south    = $south;
+    //     $this->west     = $west;
+    // }
+    public function attachRoom(string $direction, Room $room): void
+    {
+        if ($this->$direction) return;
+
+        $this->$direction = $room;
+        
+        $attachedTo = self::getOppositeDirection($direction);
+        $room->attachRoom($attachedTo, $this);    
+    }
+
+    private static function getOppositeDirection(string $direction): string
+    {
+        switch ($direction) {
+            case 'north': return 'south';
+            case 'east':  return 'west';
+            case 'south': return 'north';
+            case 'west':  return 'east';
+        }
     }
 
     /**
      * Returns north room
-     *
+     * 
      * @return \Noblesse\Room\Interfaces\Direction|null
      */
     public function north(): ?Direction

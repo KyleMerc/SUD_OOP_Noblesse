@@ -13,4 +13,5 @@
   
 //   $greetingFunction = getGreetingFunction();
 //   echo $greetingFunction( "Fred" ); // Displays "Good Morning, Fred!"
-var_dump(0 == true);
+// var_dump(0 == true);
+phpinfo();
