@@ -13,12 +13,12 @@ class CharacterFactory
     /**
      * Returns the creation of main character
      *
-     * @param string $charType
+     * @param string $charName
      * @return MainCharacter|null
      */
-    public static function makeMainCharacter(string $charType): ?MainCharacter
+    public static function makeMainCharacter(string $charName): ?MainCharacter
     {
-        $character = $charType . "MainChar";
+        $character = "set" . ucwords($charName) . "MainChar";
 
         if (strncmp($character, 'enemy', 5) === 0) {
             echo "You're making an enemy!\n";
@@ -41,13 +41,15 @@ class CharacterFactory
      */
     public static function makeEnemyCharacter(string $charType): ?Character
     {
-        if (strncmp($charType, 'enemy', 5) < 0) {
+        $enemy = "setEnemy" . ucwords($charType);
+
+        if (strncmp($enemy, 'enemy', 5) < 0) {
             echo "You're making a main character\n";
             return NULL;
         }
 
-        if (method_exists(CharSetting::class, $charType)) {
-            return CharSetting::$charType();
+        if (method_exists(CharSetting::class, $enemy)) {
+            return CharSetting::$enemy();
         } else {
             echo "Invalid character\n";
             return NULL;

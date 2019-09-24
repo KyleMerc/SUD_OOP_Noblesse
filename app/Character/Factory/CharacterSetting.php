@@ -14,7 +14,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function frankMainChar(): MainCharacter
+    public static function setFrankMainChar(): MainCharacter
     {
         $frank          = new MainCharacter('Frankenstein', 'Super Modified Human', 'Dark Spear');
         $frank->damage  = [30, 50];
@@ -27,7 +27,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function m21MainChar(): MainCharacter
+    public static function setM21MainChar(): MainCharacter
     {
         $m21            = new MainCharacter('M-21', 'Simple Mofidied Human', 'Gun');
         $m21->damage    = [25, 30];
@@ -40,7 +40,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function muzakaMainChar(): MainCharacter
+    public static function setMuzakaMainChar(): MainCharacter
     {
         $muzaka         = new MainCharacter('Muzaka', 'Werewolf', 'Strong Punch');
         $muzaka->damage = [25, 45];
@@ -53,7 +53,7 @@ class CharacterSetting
      *
      * @return MainCharacter
      */
-    public static function hanMainChar(): MainCharacter
+    public static function setHanMainChar(): MainCharacter
     {
         $han            = new MainCharacter('Han Shinwoo', 'Human', 'Karate');
         $han->damage    = [40, 45];
@@ -66,7 +66,7 @@ class CharacterSetting
      *
      * @return Character
      */
-    public static function enemyVampire(): Character
+    public static function setEnemyVampire(): Character
     {
         $vampire         = new Character('Nameless', 'Vampire', 'Claws');
         $vampire->damage = [1, 10];
@@ -80,7 +80,7 @@ class CharacterSetting
      *
      * @return Character
      */
-    public static function enemyBoss(): Character
+    public static function setEnemyBoss(): Character
     {
         $noblesse           = new Character('Raizel', 'Vampire Noble', 'Blood Magic');
         $noblesse->health   = 150;

@@ -9,8 +9,8 @@ class CharacterTest extends TestCase
     public function can_create_character(): void
     {
         $character = Char::makeMainCharacter('frank');
-        $enemy     = Char::makeEnemyCharacter('enemyBoss');
-
+        $enemy     = Char::makeEnemyCharacter('Vampire');
+        
         $this->assertInstanceOf(\Noblesse\Character\Character::class, $enemy);
         $this->assertInstanceOf(\Noblesse\Character\MainCharacter::class, $character);
     }
