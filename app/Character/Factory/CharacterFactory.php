@@ -21,34 +21,42 @@ class CharacterFactory
      */
     public static function createMainCharacter(string $charName): ?MainCharacter
     {
-        $character = new ReflectionClass(MainSet::class);
-        $charMainSetting = \strtoupper($charName) . "_SETTING"; 
+        $charNameSpace = "Noblesse\Character\Factory\MainCharacterSetting::";
 
-        if ($character->hasConstant($charMainSetting)) {
-            $charValues = $character->getConstant($charMainSetting);
-            return new MainCharacter($charValues['name'], $charValues['charType'], $charValues['weaponType']);
+        if (constant($charNameSpace . strtoupper($charName) . "_SETTING")) {
+            $character = constant($charNameSpace . strtoupper($charName) . "_SETTING");
+
+            $charAddSetting = new MainCharacter($character['name'], $character['charType'], $character['weaponType']);
+            $charAddSetting->damage = $character['damage'];
+
+            return $charAddSetting;
         }
         
         echo "\nInvalid character\n";
         return NULL;
     }
 
+    /**
+     * Creation of enemy character
+     *
+     * @param string $charName
+     * @return Character|null
+     */
     public static function createEnemyCharacter(string $charName): ?Character
     {
-        $enemy = new ReflectionClass(EnemySet::class);
-        $charEnemySetting = \strtoupper($charName) . "_SETTING";
+        $enemyNameSpace = "Noblesse\Character\Factory\EnemyCharacterSetting::";
 
-        if ($enemy->hasConstant($charEnemySetting)) {
-            $enemyValues = $enemy->getConstant($charEnemySetting);
+        if (constant($enemyNameSpace . strtoupper($charName) . "_SETTING")) {
+            $enemy = constant($enemyNameSpace . strtoupper($charName) . "_SETTING");
 
-            $enemyChar = new Character($enemyValues['name'], $enemyValues['charType'], $enemyValues['weaponType']);
-            
-            if ($enemyValues['name'] == 'Nameless')
-                $enemyChar->health = rand(40, 50);
-            if ($enemyValues['name'] == 'Raizel')
-                $enemyChar->health = 150;
-            
-            return $enemyChar;
+            $enemyAddSetting = new Character($enemy['name'], $enemy['charType'], $enemy['weaponType']);
+            $enemyAddSetting->damage = $enemy['damage'];
+
+            if ($enemy['name'] == 'Raizel') $enemyAddSetting->health = 150;
+
+            if ($enemy['name'] == 'Nameless') $enemyAddSetting->health = rand(40, 50);
+
+            return $enemyAddSetting;
         }
 
         echo "\nInvalid character\n";
@@ -56,4 +64,4 @@ class CharacterFactory
     }
 }
 
-var_dump(CharacterFactory::createEnemyCharacter('boss'));
+var_dump(CharacterFactory::createEnemyCharacter('vampire'));
