@@ -8,20 +8,24 @@ class CharacterTest extends TestCase
     /** @test */
     public function can_create_character(): void
     {
-        $character = Char::human();
-
-        $this->assertInstanceOf(\Noblesse\Character\Character::class, $character);
+        $character = Char::makeMainCharacter('frank');
+        $enemy     = Char::makeEnemyCharacter('Vampire');
+        
+        $this->assertInstanceOf(\Noblesse\Character\Character::class, $enemy);
         $this->assertInstanceOf(\Noblesse\Character\MainCharacter::class, $character);
     }
 
     /** @test */
     public function character_health_decreased(): void
     {
-        $character = Char::superModifiedHuman();
-        $enemy     = Char::enemyVampire();
+        $character = Char::makeMainCharacter('han');
+        $enemy     = Char::makeEnemyCharacter('enemyVampire');
 
         $character->attack($enemy);
         $enemy->attack($character);
+
+        \Noblesse\Character\Utility\CharUtil::status($character);
+        \Noblesse\Character\Utility\CharUtil::status($enemy);
 
         $this->assertLessThan(100, $character->health);
         $this->assertLessThan(100, $enemy->health);
@@ -33,7 +37,7 @@ class CharacterTest extends TestCase
     */
     public function main_character_can_grab_and_show_items(): void
     {
-        $character = Char::simpleModifiedHuman();
+        $character = Char::makeMainCharacter('m21');
         $items = ['bowl', 'ramen'];
 
         $character->grab($items);
@@ -42,6 +46,4 @@ class CharacterTest extends TestCase
         $character->grab(['chopsticks']);
         $character->showInventory();
     }
-
-    
 }
