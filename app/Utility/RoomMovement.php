@@ -5,6 +5,7 @@ namespace Noblesse\Utility;
 require_once __DIR__.'../../../vendor/autoload.php';
 
 use Noblesse\Room\Room;
+use Noblesse\Room\FourthRoom;
 
 class RoomMovement
 {
@@ -82,7 +83,7 @@ class RoomMovement
             //------------------------------------
 
             //A chance of ambush by the enemy
-            if ($this->currentRoom->spawnEnemyChance())
+            if ($this->currentRoom->spawnEnemyChance() && ! ($this->currentRoom instanceof FourthRoom))
                 echo "Fight";
         }
     }
@@ -103,3 +104,6 @@ class RoomMovement
         }
     }
 }
+
+// $obj = new RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('m21'));
+// $obj->showRoomMenu();

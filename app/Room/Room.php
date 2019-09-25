@@ -10,6 +10,7 @@ class Room implements Direction
 {
     private $name;
     private $isLocked;
+    private $dialogue;
 
     /**
      * These 4 are Direction type
@@ -177,10 +178,11 @@ class Room implements Direction
                         
                                 |
                               south
-                            {$roomDisplay['south']}
+                            {$roomDisplay['south']}\n\n
 MAP;
 
         echo "\n" . $visualMap;
+        echo $this->dialogue;
         echo "\nAdjacent Rooms\n";
         echo "----------------\n";
         echo $roomMsg;

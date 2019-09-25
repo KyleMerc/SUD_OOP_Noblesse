@@ -1,24 +1,7 @@
 <?php
-// // A simple example of a closure
 
-// function getGreetingFunction() {
+$arr = [];
 
-//     $timeOfDay = "evening";
-  
-//     return ( function( $name ) use ( &$timeOfDay ) {
-//       $timeOfDay = ucfirst( $timeOfDay ); 
-//       return ( "Good $timeOfDay, $name!" );
-//     } );
-//   };
-  
-//   $greetingFunction = getGreetingFunction();
-//   echo $greetingFunction( "Fred" ); // Displays "Good Morning, Fred!"
-// var_dump(0 == true);
-$lol = ['north' => '', 'south' => 'bedroom', 'west' => 'balcony', 'east' => 'kitchen'];
-foreach ($lol as $key => $direction) {
-    if ($direction == false) continue;
-
-    $oneChar = substr($key, 0, 1);
-    var_dump($oneChar);
-}
-
+$arr = ['bowl'];
+array_push($arr, 'chopsticks');
+var_dump($arr);
