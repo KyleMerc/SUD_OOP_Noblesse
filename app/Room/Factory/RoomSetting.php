@@ -25,6 +25,10 @@ class RoomSetting
         $room3 = new Room('Bedroom');
         $room4 = new FourthRoom('Balcony', true);
 
+        $room1->items = ['chopsticks'];
+        $room2->items = ['coffemug', 'ramen'];
+        $room3->items = ['bowl'];
+
         $room1->attachRoom('east', $room2);
         $room1->attachRoom('south', $room3);
         $room1->attachRoom('west', $room4);
@@ -48,6 +52,10 @@ class RoomSetting
         $room2 = new Room('Kitchen');
         $room3 = new Room('Great Hall', true);
         $room4 = new FourthRoom('Vault', true);
+
+        $room1->items = ['chopsticks', 'ramen'];
+        $room2->items = ['teapot', 'bowl'];
+        $room3->items = ['picture'];
 
         $room1->attachRoom('east', $room3);
         $room1->attachRoom('west', $room2);
@@ -74,6 +82,10 @@ class RoomSetting
         $room3 = new Room('Secret Room', true);
         $room4 = new FourthRoom('Drawing Room', true);
 
+        $room1->items = ['teapot'];
+        $room2->items = ['bowl', 'ramen'];
+        $room3->items = ['chopsticks'];
+
         $room1->attachRoom('east', $room2);
         $room1->attachRoom('south', $room4);
 
@@ -98,6 +110,10 @@ class RoomSetting
         $room2 = new Room('Gallery');
         $room3 = new Room('Rest Room');
         $room4 = new FourthRoom('Drawing Room', true);
+
+        $room1->items = ['bowl'];
+        $room2->items = ['chopsticks'];
+        $room3->items = ['ramen', 'coffemug'];
 
         $room2->attachRoom('north', $room4);
         $room2->attachRoom('west', $room1);

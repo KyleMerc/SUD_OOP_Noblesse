@@ -11,6 +11,7 @@ class Room implements Direction
     private $name;
     private $isLocked;
     private $dialogue;
+    private $items = [];
 
     /**
      * These 4 are Direction type

@@ -15,6 +15,9 @@
     "autoload": {
         "psr-4": {
             "Noblesse\\": "app"
-        }
+        },
+        "files": [
+            "app/Utility/Helpers.php"
+        ]
     }
 }

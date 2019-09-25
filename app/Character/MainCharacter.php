@@ -68,7 +68,7 @@ class MainCharacter extends Character
             
         
         foreach ($this->inventory as $item) {
-            echo $item . "\n";
+            echo "* " . $item . "\n";
         }
     }
 }
