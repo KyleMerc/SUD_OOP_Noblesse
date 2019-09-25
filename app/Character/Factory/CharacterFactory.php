@@ -20,11 +20,6 @@ class CharacterFactory
     {
         $character = "set" . ucwords($charName) . "MainChar";
 
-        if (strncmp($character, 'enemy', 5) === 0) {
-            echo "You're making an enemy!\n";
-            return NULL;
-        }
-
         if (method_exists(CharSetting::class, $character)) {
             return CharSetting::$character();
         } else {
@@ -42,11 +37,6 @@ class CharacterFactory
     public static function makeEnemyCharacter(string $charType): ?Character
     {
         $enemy = "setEnemy" . ucwords($charType);
-
-        if (strncmp($enemy, 'enemy', 5) < 0) {
-            echo "You're making a main character\n";
-            return NULL;
-        }
 
         if (method_exists(CharSetting::class, $enemy)) {
             return CharSetting::$enemy();

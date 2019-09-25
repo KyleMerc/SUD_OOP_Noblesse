@@ -1,9 +1,5 @@
 <?php
 
-$case1 = 'Enemy';
-$case2 = 'setEnemyBoss';
+require_once __DIR__.'/vendor/autoload.php';
 
-$res = strncmp($case1, $case2, 8);
-$sample = strpos("setenemyBoss", "Enemy");
-$one = strcasecmp($case1, $case2);
-var_dump($res);
+use Noblesse\Character\Factory\CharacterFactory as Factory;
