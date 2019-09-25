@@ -1,7 +1,13 @@
 <?php
 
-$arr = [];
+class Sample
+{
+    public $name;
+}
 
-$arr = ['bowl'];
-array_push($arr, 'chopsticks');
-var_dump($arr);
+$obj = new Sample;
+$prop = 'name';
+
+$obj->$prop = 'Hello';
+
+echo $obj->$prop . "\n";
