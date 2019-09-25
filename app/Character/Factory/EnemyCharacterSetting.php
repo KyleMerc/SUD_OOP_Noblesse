@@ -4,6 +4,8 @@ namespace Noblesse\Character\Factory;
 
 interface EnemyCharacterSetting
 {
+    const CHAR_NAMESPACE = __CLASS__ . "::";
+
     const VAMPIRE_SETTING = [
         'name'          => 'Nameless',
         'charType'      => 'Vampire',

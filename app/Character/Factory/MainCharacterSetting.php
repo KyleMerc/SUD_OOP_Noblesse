@@ -2,8 +2,10 @@
 
 namespace Noblesse\Character\Factory;
 
-class MainCharacterSetting
+interface MainCharacterSetting
 {
+    const CHAR_NAMESPACE = __CLASS__ . "::";
+
     const FRANK_SETTING = [
         'name'          => 'Frankenstein',
         'charType'      => 'SuperModifiedHuman',
@@ -32,7 +34,3 @@ class MainCharacterSetting
         'damage'        => [40, 45]
     ];
 }
-
-// $char = "Noblesse\Character\Factory\MainCharacterSetting::FRANK";
-
-// var_dump(constant($char."_SETTING"));

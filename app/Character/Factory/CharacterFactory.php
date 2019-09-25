@@ -4,10 +4,8 @@ namespace Noblesse\Character\Factory;
 
 require_once __DIR__.'../../../../vendor/autoload.php';
 
-use Noblesse\Character\Factory\CharacterSetting as CharSetting;
 use Noblesse\Character\Factory\MainCharacterSetting as MainSet;
 use Noblesse\Character\Factory\EnemyCharacterSetting as EnemySet;
-use ReflectionClass;
 use Noblesse\Character\MainCharacter;
 use Noblesse\Character\Character;
 
@@ -19,12 +17,10 @@ class CharacterFactory
      * @param string $charName
      * @return MainCharacter|null
      */
-    public static function createMainCharacter(string $charName): ?MainCharacter
+    public static function makeMainCharacter(string $charName): ?MainCharacter
     {
-        $charNameSpace = "Noblesse\Character\Factory\MainCharacterSetting::";
-
-        if (constant($charNameSpace . strtoupper($charName) . "_SETTING")) {
-            $character = constant($charNameSpace . strtoupper($charName) . "_SETTING");
+        if (constant(MainSet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING")) {
+            $character = constant(MainSet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING");
 
             $charAddSetting = new MainCharacter($character['name'], $character['charType'], $character['weaponType']);
             $charAddSetting->damage = $character['damage'];
@@ -42,12 +38,10 @@ class CharacterFactory
      * @param string $charName
      * @return Character|null
      */
-    public static function createEnemyCharacter(string $charName): ?Character
+    public static function makeEnemyCharacter(string $charName): ?Character
     {
-        $enemyNameSpace = "Noblesse\Character\Factory\EnemyCharacterSetting::";
-
-        if (constant($enemyNameSpace . strtoupper($charName) . "_SETTING")) {
-            $enemy = constant($enemyNameSpace . strtoupper($charName) . "_SETTING");
+        if (constant(EnemySet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING")) {
+            $enemy = constant(EnemySet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING");
 
             $enemyAddSetting = new Character($enemy['name'], $enemy['charType'], $enemy['weaponType']);
             $enemyAddSetting->damage = $enemy['damage'];
@@ -63,5 +57,3 @@ class CharacterFactory
         return NULL;
     }
 }
-
-var_dump(CharacterFactory::createEnemyCharacter('vampire'));
