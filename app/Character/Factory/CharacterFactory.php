@@ -5,44 +5,55 @@ namespace Noblesse\Character\Factory;
 require_once __DIR__.'../../../../vendor/autoload.php';
 
 use Noblesse\Character\Factory\CharacterSetting as CharSetting;
+use Noblesse\Character\Factory\MainCharacterSetting as MainSet;
+use Noblesse\Character\Factory\EnemyCharacterSetting as EnemySet;
+use ReflectionClass;
 use Noblesse\Character\MainCharacter;
 use Noblesse\Character\Character;
 
 class CharacterFactory
 {
     /**
-     * Returns the creation of main character
+     * Creation of main character
      *
      * @param string $charName
      * @return MainCharacter|null
      */
-    public static function makeMainCharacter(string $charName): ?MainCharacter
+    public static function createMainCharacter(string $charName): ?MainCharacter
     {
-        $character = "set" . ucwords($charName) . "MainChar";
+        $character = new ReflectionClass(MainSet::class);
+        $charMainSetting = \strtoupper($charName) . "_SETTING"; 
 
-        if (method_exists(CharSetting::class, $character)) {
-            return CharSetting::$character();
-        } else {
-            echo "Invalid character\n";
-            return NULL;
+        if ($character->hasConstant($charMainSetting)) {
+            $charValues = $character->getConstant($charMainSetting);
+            return new MainCharacter($charValues['name'], $charValues['charType'], $charValues['weaponType']);
         }
+        
+        echo "\nInvalid character\n";
+        return NULL;
     }
 
-    /**
-     * Returns the creation of enemy character
-     *
-     * @param string $charType
-     * @return Character|null
-     */
-    public static function makeEnemyCharacter(string $charType): ?Character
+    public static function createEnemyCharacter(string $charName): ?Character
     {
-        $enemy = "setEnemy" . ucwords($charType);
+        $enemy = new ReflectionClass(EnemySet::class);
+        $charEnemySetting = \strtoupper($charName) . "_SETTING";
 
-        if (method_exists(CharSetting::class, $enemy)) {
-            return CharSetting::$enemy();
-        } else {
-            echo "Invalid character\n";
-            return NULL;
+        if ($enemy->hasConstant($charEnemySetting)) {
+            $enemyValues = $enemy->getConstant($charEnemySetting);
+
+            $enemyChar = new Character($enemyValues['name'], $enemyValues['charType'], $enemyValues['weaponType']);
+            
+            if ($enemyValues['name'] == 'Nameless')
+                $enemyChar->health = rand(40, 50);
+            if ($enemyValues['name'] == 'Raizel')
+                $enemyChar->health = 150;
+            
+            return $enemyChar;
         }
+
+        echo "\nInvalid character\n";
+        return NULL;
     }
 }
+
+var_dump(CharacterFactory::createEnemyCharacter('boss'));

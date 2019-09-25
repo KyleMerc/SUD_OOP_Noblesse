@@ -32,6 +32,11 @@ class MainCharacter extends Character
     {
         $items = $this->inventory;
 
+        if (empty($newItem)) {
+            echo "\nThere is no item here\n";
+            return;
+        }
+
         if ($items == NULL) {
             foreach ($newItem as $item) {
                 echo "\nItem acquired: '$item' \n";
