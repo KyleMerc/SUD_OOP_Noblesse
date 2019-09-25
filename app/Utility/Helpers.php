@@ -2,6 +2,13 @@
 
 namespace Noblesse\Utility;
 
+const REGEX_DIRECTION = '/^[^a-z0-9]*([newsq])[^a-z0-9]*$/';
+
+/**
+ * Show choose character options
+ *
+ * @return string
+ */
 function showPickChar(): string {
     echo "
     Welcome to Noblesse - SUD game.
@@ -11,6 +18,11 @@ function showPickChar(): string {
     return readline("Choose your destiny: ");
 }
 
+/**
+ * Show list of commands of the game
+ *
+ * @return void
+ */
 function showCommands(): void {
     echo "
     ---Command Options---
@@ -23,4 +35,20 @@ function showCommands(): void {
     [wakeup]    WakeUp the Noblesse in the final room.
     [quit]      Quit game
     ----------------------------\n";
+}
+
+/**
+ * Returns the word of 4 direction picked by the user
+ *
+ * @param string $directionOpt
+ * @return string
+ */
+function returnWordDirection(string $directionOpt): string
+{
+    switch($directionOpt) {
+        case 'n': return 'north';
+        case 'e': return 'east';
+        case 's': return 'south';
+        case 'w': return 'west';
+    }
 }

@@ -47,8 +47,11 @@ while(true) {
             $mainChar->showInventory();
             break;
         case 'unlock':
+            $mainChar->unlockRoom($room->currentRoom);
             break;
         case 'wakeup':
             break;
+        default:
+            echo "\nInvalid command...\n";
     }
 }

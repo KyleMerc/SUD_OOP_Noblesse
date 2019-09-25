@@ -89,12 +89,12 @@ class Room implements Direction
     }
 
     /**
-     * Return null if one locked room found.
-     * Return false if no locked room found.
+     * Return null if no found locked room.
+     * Return string for locked room options.
      *
-     * @return boolean
+     * @return string|null
      */
-    public function foundLockedRooms(): bool
+    public function foundLockedRooms(): ?string
     {
         $north = $this->north;
         $east  = $this->east;
@@ -105,26 +105,26 @@ class Room implements Direction
 
         if ($north && $north->isLocked) {
             $roomMsg .= "North: {$north->name}\n";
-            $roomOpt = ' [n]';
+            $roomOpt .= ' [n]';
         } 
             
         if ($east  && $east->isLocked) {
             $roomMsg .= "East:  {$east->name}\n";
-            $roomOpt = ' [e]';
+            $roomOpt .= ' [e]';
         } 
             
         if ($south && $south->isLocked) {
             $roomMsg .= "South: {$south->name}\n";
-            $roomOpt = ' [s]';
+            $roomOpt .= ' [s]';
         } 
             
         if ($west  && $west->isLocked) {
             $roomMsg .= "West:  {$west->name}\n";
-            $roomOpt = ' [w]';
+            $roomOpt .= ' [w]';
         } 
             
 
-        if ($roomMsg === '') return false;
+        if ($roomMsg === '') return NULL;
 
         echo "\nLocked Rooms";
         echo "\nCmd Options:$roomOpt";
@@ -132,7 +132,7 @@ class Room implements Direction
         echo $roomMsg;
         echo "-----------------\n";
 
-        return true;
+        return $roomOpt;
     }
 
     /**

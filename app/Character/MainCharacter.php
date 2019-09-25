@@ -5,7 +5,11 @@ namespace Noblesse\Character;
 require_once $_SERVER['DOCUMENT_ROOT'] .'vendor/autoload.php';
 
 use Noblesse\Character\Character;
+use Noblesse\Room\Room;
 
+use function Noblesse\Utility\returnWordDirection;
+
+use const Noblesse\Utility\REGEX_DIRECTION;
 class MainCharacter extends Character
 {
     private $inventory;
@@ -34,7 +38,7 @@ class MainCharacter extends Character
 
         if ($items == NULL) {
             foreach ($newItem as $item) {
-                echo "\nItem acquired: '$item' \n";
+                echo "\nItem acquired: '$item'";
             }
 
             $this->inventory = $newItem;
@@ -47,7 +51,7 @@ class MainCharacter extends Character
                 return;
             }
 
-            echo "Item acquired: '$item' \n";
+            echo "\nItem acquired: '$item' \n";
             array_push($this->inventory, $item);
         }
     }
@@ -70,5 +74,45 @@ class MainCharacter extends Character
         foreach ($this->inventory as $item) {
             echo "* " . $item . "\n";
         }
+    }
+
+    /**
+     * Get the current room to which adjacent room to be unlocked.
+     *
+     * @param Room $room
+     * @return void
+     */
+    public function unlockRoom(Room $room): void
+    {
+        $isFoundLocked = $room->foundLockedRooms();
+
+        if ($isFoundLocked !== NULL) {
+            $opt = \readline("Choose room: ");
+
+            if (\preg_match(REGEX_DIRECTION, $opt) == 0) {
+                echo "\nInvalid Command...\n";
+                return;
+            } 
+
+            if (empty($this->inventory)) {
+                echo "\nInventory is empty\n";
+                return;
+            }
+
+            if (in_array('key', $this->inventory) == null && !empty($this->inventory)) {
+                echo "\nYou have no key!\n";
+                return;
+            }
+            
+            $foundRoom  = $room->goToNextRoom(returnWordDirection($opt));
+            $lockedRoom = $room->goToNextRoom(returnWordDirection($opt))->isLocked;
+
+             if ($foundRoom && $lockedRoom) {
+                $foundRoom->isLocked = false;
+                echo "\nDoor is now open!\n";
+
+             } else echo "\nDoor is not lock\n";
+            
+        } else echo "\nNo found locked rooms..\n";
     }
 }

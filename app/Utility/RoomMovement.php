@@ -7,10 +7,13 @@ require_once __DIR__.'../../../vendor/autoload.php';
 use Noblesse\Room\Room;
 use Noblesse\Room\FourthRoom;
 
+use function Noblesse\Utility\returnWordDirection;
+
+use const Noblesse\Utility\REGEX_DIRECTION;
+
 class RoomMovement
 {
     private $currentRoom;
-    private static $regexDirection = '/^[^a-z0-9]*([newsq])[^a-z0-9]*$/';
 
     /**
      * Sets the room for the main character
@@ -61,7 +64,7 @@ class RoomMovement
             $opt = \readline("Where to go?{$foundRoomOptDisplay}\n or Go back [q]: ");
             //----------------------------------
 
-            if (\preg_match(self::$regexDirection, $opt) == 0) {
+            if (\preg_match(REGEX_DIRECTION, $opt) == 0) {
                 echo "\nInvalid Command...\n";
                 continue;
             }
@@ -70,7 +73,7 @@ class RoomMovement
             if ($opt === 'q') return;
 
             //This is where the changing of room happened.
-            $nextRoom = $this->currentRoom->goToNextRoom(self::returnWordDirection($opt));
+            $nextRoom = $this->currentRoom->goToNextRoom(returnWordDirection($opt));
 
             if ($nextRoom) {
                 if ($nextRoom->isLocked) {
@@ -87,23 +90,4 @@ class RoomMovement
                 echo "Fight";
         }
     }
-
-    /**
-     * Returns the word of 4 direction picked by the user
-     *
-     * @param string $directionOpt
-     * @return string
-     */
-    private static function returnWordDirection(string $directionOpt): string
-    {
-        switch($directionOpt) {
-            case 'n': return 'north';
-            case 'e': return 'east';
-            case 's': return 'south';
-            case 'w': return 'west';
-        }
-    }
 }
-
-// $obj = new RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('m21'));
-// $obj->showRoomMenu();
