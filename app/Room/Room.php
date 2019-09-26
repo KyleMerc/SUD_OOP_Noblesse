@@ -13,7 +13,7 @@ class Room
     /** @var string */
     private $dialogue;
 
-    /** @var string */
+    /** @var array */
     private $items = [];
 
     /**

@@ -19,7 +19,7 @@ class CharacterFactory
      */
     public static function makeMainCharacter(string $charName): ?MainCharacter
     {
-        if (constant(MainSet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING")) {
+        if (@constant(MainSet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING")) {
             $character = constant(MainSet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING");
 
             $charAddSetting = new MainCharacter($character['name'], $character['charType'], $character['weaponType']);

@@ -15,7 +15,7 @@ while (true) {
     if (CharMake::makeMainCharacter($pickChar) === NULL) continue; 
 
     $mainChar = CharMake::makeMainCharacter($pickChar);
-    $room     = new RoomMovement(Room::setCharRoom($pickChar));
+    $room     = new RoomMovement(Room::setUpCharRoom($pickChar));
     break;
 }
 
@@ -47,7 +47,7 @@ while(true) {
             $mainChar->showInventory();
             break;
         case 'unlock':
-            $mainChar->unlockRoom($room->currentRoom);
+            $mainChar->unlockNextRoom($room->currentRoom);
             break;
         case 'wakeup':
             break;

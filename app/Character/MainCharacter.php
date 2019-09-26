@@ -87,7 +87,7 @@ class MainCharacter extends Character
      * @param Room $room
      * @return void
      */
-    public function unlockRoom(Room $room): void
+    public function unlockNextRoom(Room $room): void
     {
         $isFoundLocked = $room->foundLockedRooms();
 
@@ -97,7 +97,10 @@ class MainCharacter extends Character
             if (\preg_match(REGEX_DIRECTION, $opt) == 0) {
                 echo "\nInvalid Command...\n";
                 return;
-            } 
+            }
+            
+            $foundRoom  = $room->goToNextRoom(returnWordDirection($opt));
+            $lockedRoom = $room->goToNextRoom(returnWordDirection($opt))->isLocked;
 
             if (empty($this->inventory)) {
                 echo "\nInventory is empty\n";
@@ -108,15 +111,18 @@ class MainCharacter extends Character
                 echo "\nYou have no key!\n";
                 return;
             }
-            
-            $foundRoom  = $room->goToNextRoom(returnWordDirection($opt));
-            $lockedRoom = $room->goToNextRoom(returnWordDirection($opt))->isLocked;
 
-             if ($foundRoom && $lockedRoom) {
+            if ($foundRoom && $lockedRoom) {
                 $foundRoom->isLocked = false;
                 echo "\nDoor is now open!\n";
-
-             } else echo "\nDoor is not lock\n";
+                return;
+            } elseif (! $foundRoom) {
+                echo "\nRoom not found\n";
+                return;
+            } else {
+                echo "\nDoor is not lock\n";
+                return;
+            }
             
         } else echo "\nNo found locked rooms..\n";
     }
