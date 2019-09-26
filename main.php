@@ -3,7 +3,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 use Noblesse\Character\Factory\CharacterFactory as CharMake;
-use Noblesse\Character\Utility\CharUtil as Char;
+use Noblesse\Utility\CharUtil as Char;
 use Noblesse\Room\Factory\RoomFactory as Room;
 use Noblesse\Utility\RoomMovement;
 
