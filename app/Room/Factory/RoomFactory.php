@@ -35,6 +35,7 @@ class RoomFactory
 
                 $$room = new Room($roomSetUp[$room]['name'], $roomSetUp[$room]['isLocked']);
 
+                $$room->items    = $roomSetUp[$room]['items'];
                 $$room->dialogue = $roomSetUp[$room]['dialogue'];
             }
 

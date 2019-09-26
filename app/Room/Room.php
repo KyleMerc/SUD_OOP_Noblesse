@@ -7,6 +7,7 @@ class Room
     private $name;
     private $isLocked;
     private $dialogue;
+    private $items = [];
 
     /**
      * These 4 are Direction type
