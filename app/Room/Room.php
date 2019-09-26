@@ -4,18 +4,25 @@ namespace Noblesse\Room;
 
 class Room
 {
+    /** @var string */
     private $name;
+
+    /** @var bool */
     private $isLocked;
+
+    /** @var string */
     private $dialogue;
+
+    /** @var string */
     private $items = [];
 
     /**
-     * These 4 are Direction type
+     * These 4 are Room type
      *
-     * @var Direction
-     * @var Direction
-     * @var Direction
-     * @var Direction
+     * @var Room
+     * @var Room
+     * @var Room
+     * @var Room
      */
     private $north;
     private $east;

@@ -4,11 +4,22 @@ namespace Noblesse\Character;
 
 class Character
 {
+    /** @var string */
     private $name;
+
+    /** @var string */
     private $charType;
+
+    /** @var string */
     private $weaponType;
+
+    /** @var int */
     private $health;
+
+    /** @var array */
     private $damage;
+
+    /** @var int */
     private $baseHealth;
 
     /**
@@ -38,11 +49,6 @@ class Character
     public function __get($property)
     {
         return $this->$property;
-    }
-
-    public static function getBaseHealth(): int
-    {
-        return self::$health;
     }
 
     /**
