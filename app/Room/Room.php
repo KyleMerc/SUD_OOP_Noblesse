@@ -13,6 +13,9 @@ class Room
     /** @var string */
     private $dialogue;
 
+    /** @var string */
+    private $hint;
+
     /** @var array */
     private $items = [];
 
@@ -55,6 +58,19 @@ class Room
             return $this->$prop;
         else
             echo "No property found";
+    }
+
+    public function __toString(): string
+    {
+        $signBoard = <<<MSG
+            ----------------------------------------
+           |                 HINT                   |
+             {$this->hint}
+           |                                        |        
+            ----------------------------------------\n
+MSG;
+
+        return $signBoard;
     }
 
     /**

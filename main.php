@@ -19,6 +19,9 @@ while (true) {
     break;
 }
 
+function func_name(Type $args): void {
+    # code...
+}
 while(true) {
     echo "\nTo know which command, type [help]\n";
     $optCmd = readline("Enter a command: ");
@@ -36,6 +39,7 @@ while(true) {
             Char::getStatus($mainChar);
             break;
         case 'hint':
+            echo $room->currentRoom;
             break;
         case 'travel':
             $room->showRoomMenu();
