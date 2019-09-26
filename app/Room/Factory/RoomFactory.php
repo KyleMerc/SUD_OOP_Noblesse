@@ -7,7 +7,6 @@ require_once __DIR__.'../../../../vendor/autoload.php';
 use Noblesse\Room\Factory\RoomSetting as Setting;
 use Noblesse\Room\Room;
 use Noblesse\Room\FourthRoom;
-use Noblesse\Room\Factory\NewRoomSetting;
 
 class RoomFactory
 {
@@ -20,7 +19,7 @@ class RoomFactory
      */
     public static function setUpCharRoom(string $charName): ?Room
     {
-        $charRoom = NewRoomSetting::ROOM_NAMESPACE . strtoupper($charName) . "_ROOM_SETTING";
+        $charRoom = Setting::ROOM_NAMESPACE . strtoupper($charName) . "_ROOM_SETTING";
 
         if (@constant($charRoom)) {
             $roomSetUp = constant($charRoom);
@@ -72,5 +71,3 @@ class RoomFactory
         return NULL;
     }
 }
-
-var_dump(RoomFactory::setUpCharRoom('m21'));

@@ -1,6 +1,6 @@
 <?php
 
-namespace Noblesse\Character\Utility;
+namespace Noblesse\Utility;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
 

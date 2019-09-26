@@ -77,7 +77,7 @@ class RoomTest extends TestCase
     /** @test */
     public function set_the_rooms_for_main_character(): void
     {
-        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('frank'));
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setUpCharRoom('frank'));
         
         $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->currentRoom->goToNextRoom('east'));
         $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->currentRoom->goToNextRoom('south'));
@@ -87,7 +87,7 @@ class RoomTest extends TestCase
     /** @test */
     public function found_locked_rooms(): void
     {
-        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('frank'));
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setUpCharRoom('frank'));
         
         $result = $room->currentRoom->foundLockedRooms();
 
@@ -100,7 +100,7 @@ class RoomTest extends TestCase
     */
     public function available_rooms_from_the_current_room(): void
     {
-        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('m21'));
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setUpCharRoom('m21'));
 
         $room->currentRoom->foundRooms();
     }
@@ -111,7 +111,7 @@ class RoomTest extends TestCase
     */
     public function show_room_menu_options_and_enemy_chance_ambush_on_next_room(): void
     {
-        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('han'));
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setUpCharRoom('han'));
         
         $room->showRoomMenu();
     }
