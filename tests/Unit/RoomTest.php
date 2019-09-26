@@ -91,7 +91,7 @@ class RoomTest extends TestCase
         
         $result = $room->currentRoom->foundLockedRooms();
 
-        $this->assertTrue($result);
+        $this->assertIsString($result);
     }
 
     /** 

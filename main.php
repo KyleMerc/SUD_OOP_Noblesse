@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< HEAD
 require_once __DIR__.'/vendor/autoload.php';
 
 use Noblesse\Character\Factory\CharacterFactory as CharMake;
@@ -56,10 +55,3 @@ while(true) {
             echo "\nInvalid command...\n";
     }
 }
-=======
-$arr = [];
-$lol = [];
-$arr = $lol;
-var_dump($arr);
-
->>>>>>> OOPMap

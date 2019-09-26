@@ -24,8 +24,8 @@ class CharacterTest extends TestCase
         $character->attack($enemy);
         $enemy->attack($character);
 
-        \Noblesse\Character\Utility\CharUtil::status($character);
-        \Noblesse\Character\Utility\CharUtil::status($enemy);
+        \Noblesse\Utility\CharUtil::getStatus($character);
+        \Noblesse\Utility\CharUtil::getStatus($enemy);
 
         $this->assertLessThan(100, $character->health);
         $this->assertLessThan(100, $enemy->health);
