@@ -17,10 +17,10 @@ class RoomTest extends TestCase
         $this->assertInstanceOf(\Noblesse\Room\Room::class, $room3);
         $this->assertInstanceOf(\Noblesse\Room\Room::class, $room4);
 
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1);
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room2);
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room3);
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room4);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room1);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room2);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room3);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room4);
     }
 
     /** @test */
@@ -50,13 +50,13 @@ class RoomTest extends TestCase
         $room1->attachRoom('west', $room4);
 
         $this->assertNull($room1->north);
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->east);
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->south);
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->west);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room1->east);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room1->south);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room1->west);
 
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room2->west);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room2->west);
 
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room3->north);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room3->north);
 
         $this->assertIsString($room1->south->name);
         $this->assertIsString($room2->west->name);
