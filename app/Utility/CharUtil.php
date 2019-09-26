@@ -134,11 +134,12 @@ class CharUtil
         $charType       = $character->charType;
         $weapon         = $character->weaponType;
         $damage         = $character->damage;
+        $baseHealth     = $character->baseHealth;
 
         $statusMsg = "
                   ----------------------------------------------
                   |                                            |
-                     Name: $name -- Health: $health / 100
+                     Name: $name -- Health: $health / $baseHealth
                   |                                            |
                      Character Type: $charType
                   |                                            |

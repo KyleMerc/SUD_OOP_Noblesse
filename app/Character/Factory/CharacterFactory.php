@@ -46,10 +46,13 @@ class CharacterFactory
             $enemyAddSetting = new Character($enemy['name'], $enemy['charType'], $enemy['weaponType']);
             $enemyAddSetting->damage = $enemy['damage'];
 
-            if ($charName === 'boss') 
+            if ($charName === 'boss') {
                 $enemyAddSetting->health = 150;
-            else 
+                $enemyAddSetting->baseHealth = 150;
+            } else {
                 $enemyAddSetting->health = rand(40, 50);
+                $enemyAddSetting->baseHealth = $enemyAddSetting->health;
+            }
 
             return $enemyAddSetting;
         }

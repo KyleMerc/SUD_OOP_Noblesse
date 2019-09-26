@@ -9,7 +9,7 @@ class Character
     private $weaponType;
     private $health;
     private $damage;
-
+    private $baseHealth;
 
     /**
      * Setting for default Character
@@ -24,6 +24,7 @@ class Character
         $this->charType     = $newCharType;
         $this->weaponType   = $newWeaponType;
         $this->health       = 100;
+        $this->baseHealth   = 100;
     }
 
     public function __set($property, $value): void
@@ -39,6 +40,16 @@ class Character
         return $this->$property;
     }
 
+    public static function getBaseHealth(): int
+    {
+        return self::$health;
+    }
+
+    /**
+     * Returns random range of int
+     *
+     * @return integer
+     */
     public function getDamage(): int
     {
         return rand($this->damage[0], $this->damage[1]);
