@@ -42,7 +42,7 @@ while(true) {
             echo $room->currentRoom;
             break;
         case 'travel':
-            $room->showRoomMenu();
+            $room->showRoomMenu($mainChar);
             break;
         case 'grab':
             $mainChar->grab($room->currentRoom->items);

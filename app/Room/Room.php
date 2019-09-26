@@ -60,6 +60,11 @@ class Room
             echo "No property found";
     }
 
+    /**
+     * Hint for the room
+     *
+     * @return string
+     */
     public function __toString(): string
     {
         $signBoard = <<<MSG

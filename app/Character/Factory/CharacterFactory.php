@@ -7,7 +7,7 @@ require_once __DIR__.'../../../../vendor/autoload.php';
 use Noblesse\Character\Factory\MainCharacterSetting as MainSet;
 use Noblesse\Character\Factory\EnemyCharacterSetting as EnemySet;
 use Noblesse\Character\MainCharacter;
-use Noblesse\Character\Character;
+use Noblesse\Character\EnemyCharacter;
 
 class CharacterFactory
 {
@@ -36,14 +36,14 @@ class CharacterFactory
      * Creation of enemy character
      *
      * @param string $charName
-     * @return Character|null
+     * @return EnemyCharacter|null
      */
-    public static function makeEnemyCharacter(string $charName): ?Character
+    public static function makeEnemyCharacter(string $charName): ?EnemyCharacter
     {
         if (constant(EnemySet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING")) {
             $enemy = constant(EnemySet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING");
 
-            $enemyAddSetting = new Character($enemy['name'], $enemy['charType'], $enemy['weaponType']);
+            $enemyAddSetting = new EnemyCharacter($enemy['name'], $enemy['charType'], $enemy['weaponType']);
             $enemyAddSetting->damage = $enemy['damage'];
 
             if ($charName === 'boss') {

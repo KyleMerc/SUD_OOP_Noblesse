@@ -4,6 +4,9 @@ namespace Noblesse\Utility;
 
 require_once __DIR__.'../../../vendor/autoload.php';
 
+use Noblesse\Character\MainCharacter;
+use Noblesse\Character\Factory\CharacterFactory as CharFactory;
+use Noblesse\Utility\CharUtil as Char;
 use Noblesse\Room\Room;
 use Noblesse\Room\FourthRoom;
 
@@ -20,9 +23,9 @@ class RoomMovement
      *
      * @param \Noblesse\Room\Room $mainChar
      */
-    public function __construct(Room $mainCharRoom)
+    public function __construct(Room $newMainCharRoom)
     {
-        $this->currentRoom = $mainCharRoom;
+        $this->currentRoom = $newMainCharRoom;
     }
 
     public function __get($prop)
@@ -38,7 +41,7 @@ class RoomMovement
      *
      * @return void
      */
-    public function showRoomMenu(): void
+    public function showRoomMenu(MainCharacter $mainChar): void
     {
         $opt = '';
         $noRoomMsg = "
@@ -85,9 +88,13 @@ class RoomMovement
             } else echo $noRoomMsg;
             //------------------------------------
 
-            //A chance of ambush by the enemy
-            if ($this->currentRoom->spawnEnemyChance() && ! ($this->currentRoom instanceof FourthRoom))
-                echo "Fight";
+            //A chance of attack by the enemy
+            if ($this->currentRoom->spawnEnemyChance() && ! ($this->currentRoom instanceof FourthRoom)) {
+                echo "\n\t    An enemy is going to attack you\n";
+
+                Char::startBattle($mainChar, CharFactory::makeEnemyCharacter('vampire'));
+                return;
+            }
         }
     }
 }

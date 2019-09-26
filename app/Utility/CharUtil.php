@@ -4,7 +4,7 @@ namespace Noblesse\Utility;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . 'vendor/autoload.php';
 
-use Noblesse\Character\Character;
+use Noblesse\Character\EnemyCharacter;
 use Noblesse\Character\MainCharacter;
 
 /**
@@ -16,10 +16,10 @@ class CharUtil
      * Battle interface for characters
      *
      * @param MainCharacter $mainChar
-     * @param Character     $enemyChar
+     * @param EnemyCharacter     $enemyChar
      * @return void
      */
-    public static function startBattle(MainCharacter $mainChar, Character $enemyChar): ?string
+    public static function startBattle(MainCharacter $mainChar, EnemyCharacter $enemyChar): ?string
     {
         $mainCharName   = $mainChar->name;
         $enemyCharName  = $enemyChar->name . "({$enemyChar->charType})";
@@ -36,6 +36,10 @@ class CharUtil
 
                     if ($battleStatus == 'victory') {
                         echo "\n$extraSpace You have killed the enemy\n";
+
+                        if ($enemyChar->dropItemKeyChance())
+                            $mainChar->grab($enemyChar::ITEM);
+
                         return NULL;
                     }
 
@@ -104,10 +108,10 @@ class CharUtil
      * Actual fight scene
      *
      * @param MainCharacter $mainChar
-     * @param Character     $enemyChar
+     * @param EnemyCharacter     $enemyChar
      * @return void
      */
-    public static function fight(MainCharacter $mainChar, Character $enemyChar): ?string
+    public static function fight(MainCharacter $mainChar, EnemyCharacter $enemyChar): ?string
     {
         echo "\n\t    =====================\n";
         $mainChar->attack($enemyChar);
@@ -124,7 +128,7 @@ class CharUtil
     /**
      * Show the status of the character
      *
-     * @param Character|MainCharacter $character
+     * @param EnemyCharacter|MainCharacter $character
      * @return void
      */
     public static function getStatus($character): void

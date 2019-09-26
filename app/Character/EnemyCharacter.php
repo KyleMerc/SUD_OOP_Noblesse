@@ -8,16 +8,19 @@ use Noblesse\Character\Character;
 
 class EnemyCharacter extends Character
 {
-    private $item;
-    // private const ITEMS = [];
+    public const ITEM = ['key'];
 
     public function __construct(string $newName, string $newCharType, string $newWeaponType)
     {
         parent::__construct($newName, $newCharType, $newWeaponType);
     }
 
-    public function isItemDrop(): bool
+    public function dropItemKeyChance(): bool
     {
+        if (rand(1, 100) <= 40 && $this->name != 'Raizel') {
+            return true;;
+        }
+
         return false;
     }
 }
