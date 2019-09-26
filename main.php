@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 
-use Noblesse\Character\Factory\CharacterFactory as CharMake;
+use Noblesse\Character\Misc\CharacterFactory as CharMake;
 use Noblesse\Utility\CharUtil as Char;
-use Noblesse\Room\Factory\RoomFactory as Room;
+use Noblesse\Room\Misc\RoomFactory as Room;
 use Noblesse\Utility\RoomMovement;
 
 use function Noblesse\Utility\{showPickChar, showCommands};

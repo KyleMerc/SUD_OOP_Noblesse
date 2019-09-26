@@ -1,11 +1,11 @@
 <?php
 
-namespace Noblesse\Character\Factory;
+namespace Noblesse\Character\Misc;
 
 require_once __DIR__.'../../../../vendor/autoload.php';
 
-use Noblesse\Character\Factory\MainCharacterSetting as MainSet;
-use Noblesse\Character\Factory\EnemyCharacterSetting as EnemySet;
+use Noblesse\Character\Misc\MainCharacterSetting as MainSet;
+use Noblesse\Character\Misc\EnemyCharacterSetting as EnemySet;
 use Noblesse\Character\MainCharacter;
 use Noblesse\Character\EnemyCharacter;
 

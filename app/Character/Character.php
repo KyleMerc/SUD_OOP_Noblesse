@@ -2,7 +2,7 @@
 
 namespace Noblesse\Character;
 
-class Character
+abstract class Character
 {
     /** @var string */
     private $name;
@@ -29,7 +29,7 @@ class Character
      * @param string $newCharType
      * @param string $newWeaponType
      */
-    public function __construct(string $defaultName, string $newCharType, string $newWeaponType)
+    protected function __construct(string $defaultName, string $newCharType, string $newWeaponType)
     {
         $this->name         = $defaultName;
         $this->charType     = $newCharType;

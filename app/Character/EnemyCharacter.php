@@ -18,7 +18,7 @@ class EnemyCharacter extends Character
     public function dropItemKeyChance(): bool
     {
         if (rand(1, 100) <= 40 && $this->name != 'Raizel') {
-            return true;;
+            return true;
         }
 
         return false;

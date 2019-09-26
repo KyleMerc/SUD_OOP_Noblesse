@@ -1,6 +1,6 @@
 <?php
 
-namespace Noblesse\Room\Factory;
+namespace Noblesse\Room\Misc;
 
 interface RoomSetting
 {

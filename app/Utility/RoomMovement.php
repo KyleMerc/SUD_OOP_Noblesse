@@ -5,7 +5,7 @@ namespace Noblesse\Utility;
 require_once __DIR__.'../../../vendor/autoload.php';
 
 use Noblesse\Character\MainCharacter;
-use Noblesse\Character\Factory\CharacterFactory as CharFactory;
+use Noblesse\Character\Misc\CharacterFactory as CharFactory;
 use Noblesse\Utility\CharUtil as Char;
 use Noblesse\Room\Room;
 use Noblesse\Room\FourthRoom;
@@ -85,7 +85,10 @@ class RoomMovement
                 }
 
                 $this->currentRoom = $nextRoom;
-            } else echo $noRoomMsg;
+            } else {
+                echo $noRoomMsg;
+                continue;
+            }
             //------------------------------------
 
             //A chance of attack by the enemy
