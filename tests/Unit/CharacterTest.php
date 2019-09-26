@@ -19,7 +19,7 @@ class CharacterTest extends TestCase
     public function character_health_decreased(): void
     {
         $character = Char::makeMainCharacter('han');
-        $enemy     = Char::makeEnemyCharacter('enemyVampire');
+        $enemy     = Char::makeEnemyCharacter('vampire');
 
         $character->attack($enemy);
         $enemy->attack($character);
