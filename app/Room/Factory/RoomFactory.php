@@ -39,6 +39,32 @@ class RoomFactory
                 $$room->dialogue = $roomSetUp[$room]['dialogue'];
             }
 
+            //Thinking of another solution for this
+            switch ($charName) {
+                case 'frank':
+                    $room1->attachRoom('east', $room2);
+                    $room1->attachRoom('south', $room3);
+                    $room1->attachRoom('west', $room4);
+                    break;
+                case 'muzaka':
+                    $room1->attachRoom('east', $room3);
+                    $room1->attachRoom('west', $room2);
+            
+                    $room4->attachRoom('north', $room3);
+                    break;
+                case 'han':
+                    $room1->attachRoom('east', $room2);
+                    $room1->attachRoom('south', $room4);
+            
+                    $room3->attachRoom('west', $room2);
+                    break;
+                case 'm21':
+                    $room2->attachRoom('north', $room4);
+                    $room2->attachRoom('west', $room1);
+                    $room2->attachRoom('south', $room3);
+                    break;
+            }
+
             return $room1;
         }
 
@@ -46,3 +72,5 @@ class RoomFactory
         return NULL;
     }
 }
+
+var_dump(RoomFactory::setUpCharRoom('m21'));
