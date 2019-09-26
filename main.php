@@ -1,13 +1,16 @@
 <?php
 
-class Sample
-{
-    public $name;
-}
+$first1 = 10;
+$first2 = 20;
 
-$obj = new Sample;
-$prop = 'name';
+$Bar = "a";
+$Foo = "Bar";
+$World = "Foo";
+$Hello = "World";
+$a = "Hello";
 
-$obj->$prop = 'Hello';
+$lol = 'first' . 1;
 
-echo $obj->$prop . "\n";
+$a; //Returns Hello
+echo $$lol . "\n"; //Returns World
+
