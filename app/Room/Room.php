@@ -2,11 +2,7 @@
 
 namespace Noblesse\Room;
 
-require_once __DIR__.'../../../vendor/autoload.php';
-
-use Noblesse\Room\Interfaces\Direction;
-
-class Room implements Direction
+class Room
 {
     private $name;
     private $isLocked;
