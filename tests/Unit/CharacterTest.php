@@ -9,8 +9,8 @@ class CharacterTest extends TestCase
     public function can_create_character(): void
     {
         $character = Char::makeMainCharacter('frank');
-        $enemy     = Char::makeEnemyCharacter('enemyBoss');
-
+        $enemy     = Char::makeEnemyCharacter('Vampire');
+        
         $this->assertInstanceOf(\Noblesse\Character\Character::class, $enemy);
         $this->assertInstanceOf(\Noblesse\Character\MainCharacter::class, $character);
     }
@@ -19,7 +19,7 @@ class CharacterTest extends TestCase
     public function character_health_decreased(): void
     {
         $character = Char::makeMainCharacter('han');
-        $enemy     = Char::makeEnemyCharacter('enemyVampire');
+        $enemy     = Char::makeEnemyCharacter('vampire');
 
         $character->attack($enemy);
         $enemy->attack($character);

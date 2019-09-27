@@ -4,53 +4,56 @@ namespace Noblesse\Character\Factory;
 
 require_once __DIR__.'../../../../vendor/autoload.php';
 
-use Noblesse\Character\Factory\CharacterSetting as CharSetting;
+use Noblesse\Character\Factory\MainCharacterSetting as MainSet;
+use Noblesse\Character\Factory\EnemyCharacterSetting as EnemySet;
 use Noblesse\Character\MainCharacter;
 use Noblesse\Character\Character;
 
 class CharacterFactory
 {
     /**
-     * Returns the creation of main character
+     * Creation of main character
      *
-     * @param string $charType
+     * @param string $charName
      * @return MainCharacter|null
      */
-    public static function makeMainCharacter(string $charType): ?MainCharacter
+    public static function makeMainCharacter(string $charName): ?MainCharacter
     {
-        $character = $charType . "MainChar";
+        if (constant(MainSet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING")) {
+            $character = constant(MainSet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING");
 
-        if (strncmp($character, 'enemy', 5) === 0) {
-            echo "You're making an enemy!\n";
-            return NULL;
-        }
+            $charAddSetting = new MainCharacter($character['name'], $character['charType'], $character['weaponType']);
+            $charAddSetting->damage = $character['damage'];
 
-        if (method_exists(CharSetting::class, $character)) {
-            return CharSetting::$character();
-        } else {
-            echo "Invalid character\n";
-            return NULL;
+            return $charAddSetting;
         }
+        
+        echo "\nInvalid character\n";
+        return NULL;
     }
 
     /**
-     * Returns the creation of enemy character
+     * Creation of enemy character
      *
-     * @param string $charType
+     * @param string $charName
      * @return Character|null
      */
-    public static function makeEnemyCharacter(string $charType): ?Character
+    public static function makeEnemyCharacter(string $charName): ?Character
     {
-        if (strncmp($charType, 'enemy', 5) < 0) {
-            echo "You're making a main character\n";
-            return NULL;
+        if (constant(EnemySet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING")) {
+            $enemy = constant(EnemySet::CHAR_NAMESPACE . strtoupper($charName) . "_SETTING");
+
+            $enemyAddSetting = new Character($enemy['name'], $enemy['charType'], $enemy['weaponType']);
+            $enemyAddSetting->damage = $enemy['damage'];
+
+            if ($enemy['name'] == 'Raizel') $enemyAddSetting->health = 150;
+
+            if ($enemy['name'] == 'Nameless') $enemyAddSetting->health = rand(40, 50);
+
+            return $enemyAddSetting;
         }
 
-        if (method_exists(CharSetting::class, $charType)) {
-            return CharSetting::$charType();
-        } else {
-            echo "Invalid character\n";
-            return NULL;
-        }
+        echo "\nInvalid character\n";
+        return NULL;
     }
 }

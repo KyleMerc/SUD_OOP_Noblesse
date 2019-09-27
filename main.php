@@ -1,7 +1,5 @@
 <?php
 
-$case1 = 'enemssyVampire';
-$case2 = 'enemyBoss';
+require_once __DIR__.'/vendor/autoload.php';
 
-$res = strncmp($case1, $case2, 5);
-var_dump($res);
+use Noblesse\Character\Factory\CharacterFactory as Factory;
