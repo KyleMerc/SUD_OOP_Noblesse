@@ -45,22 +45,22 @@ class RoomTest extends TestCase
         $room3 = new \Noblesse\Room\Room('Kitchen', false);
         $room4 = new \Noblesse\Room\Room('Bedroom', false);
 
-        $room1->setDirection(NULL, $room2, $room3, $room4);
-        $room2->setDirection(NULL, NULL, NULL, $room1);
-        $room3->setDirection($room1, NULL, NULL, NULL);
+        $room1->attachRoom('east', $room2);
+        $room1->attachRoom('south', $room3);
+        $room1->attachRoom('west', $room4);
 
-        $this->assertNull($room1->north());
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->east());
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->south());
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->west());
+        $this->assertNull($room1->north);
+        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->east);
+        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->south);
+        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room1->west);
 
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room2->west());
+        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room2->west);
 
-        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room3->north());
+        $this->assertInstanceOf(\Noblesse\Room\Interfaces\Direction::class, $room3->north);
 
-        $this->assertIsString($room1->south()->name);
-        $this->assertIsString($room2->west()->name);
-        $this->assertIsString($room3->north()->name);
+        $this->assertIsString($room1->south->name);
+        $this->assertIsString($room2->west->name);
+        $this->assertIsString($room3->north->name);
     }
 
     /** 
@@ -71,28 +71,25 @@ class RoomTest extends TestCase
     {
         $room1 = new \Noblesse\Room\Room('Upper Main Hall', false);
     
-        var_dump($room1->enemySpawnChance());
+        var_dump($room1->spawnEnemyChance());
     }
 
     /** @test */
     public function set_the_rooms_for_main_character(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('muzaka');
-
-        $this->assertIsArray($room->setUpRoom);
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('frank'));
         
-        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['firstRoom']);
-        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['secondRoom']);
-        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['thirdRoom']);
-        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->setUpRoom['fourthRoom']);
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->currentRoom->goToNextRoom('east'));
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->currentRoom->goToNextRoom('south'));
+        $this->assertInstanceOf(\Noblesse\Room\Room::class, $room->currentRoom->goToNextRoom('west'));
     }
 
     /** @test */
     public function found_locked_rooms(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('frank');
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('frank'));
         
-        $result = $room->foundLockedRooms();
+        $result = $room->currentRoom->foundLockedRooms();
 
         $this->assertTrue($result);
     }
@@ -103,9 +100,9 @@ class RoomTest extends TestCase
     */
     public function available_rooms_from_the_current_room(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('han');
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('m21'));
 
-        $room->foundRooms();
+        $room->currentRoom->foundRooms();
     }
 
     /** 
@@ -114,8 +111,8 @@ class RoomTest extends TestCase
     */
     public function show_room_menu_options_and_enemy_chance_ambush_on_next_room(): void
     {
-        $room = new \Noblesse\Utility\RoomExplore('frank');
+        $room = new \Noblesse\Utility\RoomMovement(\Noblesse\Room\Factory\RoomFactory::setCharRoom('han'));
         
-        $room->roomMenu();
+        $room->showRoomMenu();
     }
 }

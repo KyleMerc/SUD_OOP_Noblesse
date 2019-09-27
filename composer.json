@@ -1,0 +1,20 @@
+{
+    "name": "sud/noblesse",
+    "description": "Single User Dungeon",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Kyle Mercado",
+            "email": "kyle.mercado@fullspeedtechnologies.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^7.5",
+        "myclabs/php-enum": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Noblesse\\": "app"
+        }
+    }
+}
